@@ -1,0 +1,112 @@
+/* =========================================
+   ACCOUNT SETTINGS & FORMS
+   ========================================= */
+.settings-container {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  max-width: 800px;
+}
+
+.settings-section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1b263b;
+  margin-bottom: -10px;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #1b263b;
+  font-size: 0.95rem;
+}
+
+.premium-input {
+  padding: 14px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #1b263b;
+  background-color: #f8fafc;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.premium-input:focus {
+  outline: none;
+  border-color: #C5A059;
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1);
+  background-color: white;
+}
+
+.premium-input:disabled {
+  background-color: #f1f5f9;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.input-hint {
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+.settings-divider {
+  height: 1px;
+  background-color: #e2e8f0;
+  margin: 10px 0;
+}
+
+.settings-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.save-btn {
+  margin-top: 10px;
+  align-self: flex-start;
+}
+
+/* --- MOBILE RESPONSIVENESS (Settings) --- */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .settings-container {
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .settings-form {
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+  }
+}

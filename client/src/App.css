@@ -1,0 +1,23 @@
+/* --- GLOBAL SAFETY NET --- */
+/* This forces padding and borders to be calculated INSIDE the width, preventing overflow */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden; /* Absolutely prevents the whole page from sliding left/right */
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- THE MAIN LAYOUT FIX --- */
+.main-layout-container {
+  padding: 0 2rem; /* Keep your original desktop padding */
+}
+
+@media (max-width: 768px) {
+  .main-layout-container {
+    padding: 0; /* Remove the padding on phones so the Hero goes edge-to-edge! */
+  }
+}

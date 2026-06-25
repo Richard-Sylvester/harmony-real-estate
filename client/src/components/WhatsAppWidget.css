@@ -1,0 +1,84 @@
+/* --- THE FLOATING BUTTON --- */
+.whatsapp-floating-widget {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background-color: #25D366; /* Official WhatsApp Green */
+  color: white;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+  z-index: 9999; /* Forces it above maps, menus, and footers */
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-decoration: none;
+}
+
+.whatsapp-floating-widget:hover {
+  background-color: #128C7E;
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+  color: white;
+}
+
+/* --- THE HOVER TOOLTIP --- */
+.whatsapp-tooltip {
+  position: absolute;
+  right: 80px; /* Positions it to the left of the button */
+  background: white;
+  color: #1b263b;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  border: 1px solid #e2e8f0;
+}
+
+/* The little triangle pointer on the tooltip */
+.whatsapp-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -5px;
+  transform: translateY(-50%);
+  border-width: 6px 0 6px 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent white;
+}
+
+/* Reveal tooltip on hover */
+.whatsapp-floating-widget:hover .whatsapp-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+  .whatsapp-floating-widget {
+    bottom: 25px;
+    right: 25px;
+    width: 55px;
+    height: 55px;
+  }
+  
+  .whatsapp-floating-widget svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  /* Hide tooltip on mobile to prevent screen clutter */
+  .whatsapp-tooltip {
+    display: none;
+  }
+}

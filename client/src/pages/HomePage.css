@@ -1,0 +1,77 @@
+/* =========================================
+   💻 DESKTOP LAYOUT (Your original design)
+   ========================================= */
+.home-content-wrapper {
+  margin-top: 3rem;
+  padding: 0 2rem;
+}
+
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.empty-state-text {
+  color: #666;
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.map-section-wrapper {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+
+/* =========================================
+   📱 MOBILE RESPONSIVENESS (Swipe Carousel)
+   ========================================= */
+@media (max-width: 768px) {
+  
+  .home-content-wrapper {
+    /* Remove wrapper padding so the carousel can physically reach the right edge */
+    padding: 0 !important; 
+    margin-top: 2rem;
+    width: 100%;
+  }
+
+  /* 1. Add the safe margin back strictly to the heading */
+  .home-content-wrapper h2 {
+    padding: 0 15px;
+    margin-bottom: 15px;
+  }
+
+  /* 2. The Edge-to-Edge Carousel Trick */
+  .property-grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    /* 15px padding aligns the first card with the heading, but lets the swipe bleed off screen! */
+    padding: 5px 15px 20px 15px !important; 
+    
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 15px;
+    
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+  }
+
+  .property-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .property-grid > * {
+    flex: 0 0 85%; 
+    scroll-snap-align: start; 
+  }
+
+  /* 3. Add safe margin to the map section so it doesn't touch the edges either */
+  .map-section-wrapper {
+    padding: 0 15px !important; 
+    margin-top: 2rem;
+    margin-bottom: 6rem; 
+  }
+}

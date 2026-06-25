@@ -1,0 +1,231 @@
+/* --- FOOTER CONTAINER & GRID --- */
+.premium-footer {
+  background-color: #1b263b;
+  color: #e2e8f0;
+  padding-top: 75px; /* Added a bit more breathing room on top */
+  margin-top: 60px;
+  border-top: 4px solid #C5A059;
+}
+
+.footer-container {
+  max-width: 1250px; /* Slightly wider to let the content breathe */
+  margin: 0 auto;
+  padding: 0 30px 60px 30px;
+  display: grid;
+  
+  /* THE FIX: A foolproof percentage-based grid. 
+     Gives the brand and contact columns exactly the space they need! */
+  grid-template-columns: 32% 16% 16% 28%;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* --- COLUMN 1: BRAND --- */
+.footer-col.brand-col {
+  padding-right: 30px;
+}
+
+.footer-logo-link {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.footer-logo-img {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  
+  /* THE ALIGNMENT FIX: This pulls the image up slightly to counter 
+     any transparent blank space built into your PNG file! */
+  margin-top: -10px; 
+  margin-left: -5px; 
+}
+
+.footer-about {
+  color: #94a3b8;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin-bottom: 25px;
+  max-width: 360px; 
+}
+
+/* --- TYPOGRAPHY & HEADERS --- */
+.footer-col h3 {
+  color: #ffffff;
+  font-size: 1.15rem;
+  margin-top: 5px; /* Pushes headers down slightly to align with the logo */
+  margin-bottom: 25px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* --- LINKS COLUMNS --- */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer-links a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: #C5A059;
+  transform: translateX(4px); /* Adds a premium little slide-right effect on hover */
+}
+
+/* --- CONTACT INFO COLUMN --- */
+.footer-contact-info {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.footer-contact-info li {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.contact-icon {
+  color: #C5A059;
+  flex-shrink: 0;
+  margin-top: 3px; /* Aligns the icon perfectly with the first line of wrapped text */
+}
+
+/* --- SOCIAL ICONS --- */
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  color: #C5A059;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  background-color: #C5A059;
+  color: #1b263b;
+  transform: translateY(-3px);
+}
+
+/* --- BOTTOM COPYRIGHT BAR --- */
+.footer-bottom {
+  background-color: #0f172a;
+  padding: 24px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #64748b;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 1024px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr; /* Switch to 2 columns on tablets */
+    row-gap: 50px;
+  }
+  .footer-col.brand-col {
+    grid-column: 1 / -1; /* Make the brand span all the way across */
+    padding-right: 0;
+    text-align: center;
+  }
+  .footer-logo-img {
+    margin-left: 0;
+  }
+  .footer-about {
+    margin: 0 auto 25px auto;
+    max-width: 600px;
+  }
+  .social-links {
+    justify-content: center;
+  }
+}
+
+/* --- MOBILE RESPONSIVENESS (SMART GRID & NAV CLEARANCE) --- */
+@media (max-width: 768px) {
+  .premium-footer {
+    margin-top: 40px;
+    padding-top: 50px;
+  }
+
+  .footer-container {
+    /* 1. Smart Grid: Puts the two Link lists side-by-side to save space! */
+    grid-template-columns: 1fr 1fr; 
+    padding: 0 20px 40px 20px;
+    gap: 40px 15px;
+  }
+
+  /* 2. Forces the Brand and Contact sections to take up the full width */
+  .footer-col.brand-col,
+  .footer-col.contact-col {
+    grid-column: 1 / -1; 
+    text-align: center;
+  }
+
+  .footer-col h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+
+  .footer-about {
+    margin: 0 auto 25px auto;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+
+  /* 3. Stacks the contact icons nicely above the text */
+  .footer-contact-info li {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .contact-icon {
+    margin-bottom: 5px;
+    margin-top: 0;
+  }
+
+  /* 🚨 4. THE BOTTOM NAV LIFESAVER 🚨 */
+  .footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    /* 24px standard padding + 75px buffer for the BottomNav! */
+    padding: 24px 20px 100px 20px !important; 
+  }
+}

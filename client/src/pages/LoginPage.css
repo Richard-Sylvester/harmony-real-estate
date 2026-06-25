@@ -1,0 +1,273 @@
+/* --- FULL PAGE LAYOUT --- */
+.premium-auth-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+/* --- LEFT PANEL (Imagery & Brand) --- */
+.auth-left-panel {
+  flex: 1;
+  background-image: linear-gradient(to bottom, rgba(27, 38, 59, 0.4), rgba(27, 38, 59, 0.9)), 
+                    url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1600');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  color: white;
+}
+
+.auth-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  width: fit-content;
+  transition: all 0.3s ease;
+}
+
+.auth-back-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(-5px);
+}
+
+.auth-brand-content h1 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.text-gold {
+  color: #C5A059;
+}
+
+.auth-brand-content p {
+  font-size: 1.2rem;
+  max-width: 400px;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* --- RIGHT PANEL (The Form) --- */
+.auth-right-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background-color: #ffffff;
+}
+
+.auth-form-wrapper {
+  width: 100%;
+  max-width: 420px; /* Keeps the form perfectly narrow and readable */
+}
+
+.auth-header {
+  margin-bottom: 30px;
+}
+
+.auth-header h2 {
+  font-size: 2rem;
+  color: #1b263b;
+  margin-bottom: 10px;
+}
+
+.auth-header p {
+  color: #64748b;
+}
+
+.auth-toggle-link {
+  color: #C5A059;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* --- GOOGLE BUTTON --- */
+.google-auth-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: #ffffff;
+  color: #333;
+  border: 1px solid #d1d5db;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  transition: all 0.2s ease;
+}
+
+.google-auth-btn:hover {
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* --- DIVIDER --- */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 25px 0;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.auth-divider span {
+  padding: 0 15px;
+}
+
+/* --- FORM INPUTS --- */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Slide animation for Name field during Signup */
+.form-field-slide {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.form-field-slide.show {
+  max-height: 100px;
+  opacity: 1;
+}
+
+.auth-input-group label {
+  display: block;
+  font-weight: 600;
+  color: #1b263b;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.auth-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-icon {
+  position: absolute;
+  left: 14px;
+  color: #94a3b8;
+}
+
+.auth-input-wrapper input {
+  width: 100%;
+  padding: 14px 14px 14px 42px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  color: #1b263b;
+  transition: all 0.2s ease;
+}
+
+.auth-input-wrapper input:focus {
+  outline: none;
+  border-color: #C5A059;
+  box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.1);
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle-btn:hover {
+  color: #1b263b;
+}
+
+.forgot-password-link {
+  text-align: right;
+  font-size: 0.9rem;
+  color: #64748b;
+  cursor: pointer;
+  font-weight: 500;
+  margin-top: -10px;
+}
+
+.forgot-password-link:hover {
+  color: #C5A059;
+}
+
+/* --- SUBMIT BUTTON --- */
+.auth-submit-btn {
+  width: 100%;
+  background-color: #1b263b;
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(27, 38, 59, 0.2);
+  margin-top: 5px;
+}
+
+.auth-submit-btn:hover {
+  background-color: #C5A059;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(197, 160, 89, 0.3);
+}
+
+.auth-footer-disclaimer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin-top: 30px;
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 900px) {
+  .premium-auth-container {
+    flex-direction: column;
+  }
+  .auth-left-panel {
+    min-height: 300px;
+    padding: 30px 20px;
+  }
+  .auth-brand-content h1 {
+    font-size: 2.5rem;
+  }
+  .auth-right-panel {
+    padding: 30px 20px;
+  }
+}

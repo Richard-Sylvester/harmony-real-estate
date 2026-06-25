@@ -1,0 +1,371 @@
+/* --- PAGE BACKGROUND & CONTAINER --- */
+body {
+  background-color: #f8f9fa; /* Soft SaaS gray background */
+}
+
+.post-property-container {
+  max-width: 850px;
+  margin: 40px auto 80px auto;
+  background: white;
+  padding: 50px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f0f0f0;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- HEADER --- */
+.post-property-header {
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 25px;
+  margin-bottom: 40px;
+}
+
+.post-property-header h1 {
+  font-size: 2.2rem;
+  color: #1b263b;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.highlight-tag {
+  background-color: #f8fafc;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #1b263b;
+  font-size: 0.95rem;
+  border: 1px solid #e2e8f0;
+}
+
+/* --- FORM SECTIONS --- */
+.form-section {
+  margin-bottom: 50px;
+}
+
+.form-section h2 {
+  font-size: 1.3rem;
+  color: #1b263b;
+  margin-bottom: 30px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input-wrapper {
+  margin-bottom: 30px;
+  max-width: 450px;
+}
+
+/* --- ENTERPRISE MATERIAL INPUTS --- */
+.material-input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #e2e8f0;
+  padding: 10px 0;
+  font-size: 1.05rem;
+  color: #1b263b;
+  background: transparent;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.material-input:focus {
+  outline: none;
+  border-bottom-color: #C5A059; /* Your signature gold */
+}
+
+.material-input::placeholder {
+  color: #cbd5e1;
+}
+
+/* --- CUSTOM RADIO BUTTONS --- */
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 35px;
+  flex-wrap: wrap;
+}
+
+.radio-group .input-label {
+  margin-bottom: 0;
+  margin-right: 15px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #1b263b;
+  font-weight: 500;
+}
+
+.radio-label input {
+  display: none;
+}
+
+.radio-custom {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #cbd5e1;
+  border-radius: 50%;
+  margin-right: 10px;
+  display: inline-block;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.radio-label input:checked + .radio-custom {
+  border-color: #C5A059;
+}
+
+.radio-label input:checked + .radio-custom::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: #C5A059;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* --- SEGMENTED CONTROLS (CLICKABLE BOXES) --- */
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.feature-block.full-width {
+  grid-column: 1 / -1;
+}
+
+.segmented-control {
+  display: inline-flex;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+.segment-btn {
+  background: white;
+  border: none;
+  border-right: 1px solid #cbd5e1;
+  padding: 12px 20px;
+  font-size: 1rem;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.segment-btn:last-child {
+  border-right: none;
+}
+
+.segment-btn:hover {
+  background: #f8fafc;
+}
+
+.segment-btn.active {
+  background: #fefce8; /* Soft gold background */
+  color: #b45309; /* Darker gold text */
+  font-weight: 700;
+  box-shadow: inset 0 -3px 0 #C5A059; /* Bottom gold highlight */
+}
+
+/* --- AREA INPUT GROUP --- */
+.area-input-group {
+  display: flex;
+  gap: 20px;
+  max-width: 450px;
+}
+
+/* --- MAGICBRICKS STYLE PHOTO BANNER --- */
+.photo-upload-banner {
+  background: #fefce8;
+  border: 1.5px dashed #fcd34d;
+  border-radius: 12px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+
+.photo-upload-banner:hover {
+  background: #fef9c3;
+  border-color: #C5A059;
+}
+
+.banner-icon {
+  background: white;
+  padding: 15px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.banner-text h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.15rem;
+  color: #1b263b;
+}
+
+.banner-text p {
+  margin: 0;
+  color: #b45309;
+  font-size: 0.95rem;
+}
+
+.upload-btn {
+  background: white;
+  border: 1.5px solid #ef4444; /* Magicbricks red */
+  color: #ef4444;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.upload-btn:hover {
+  background: #fef2f2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+}
+
+/* --- YOUR AUTOCOMPLETE DROPDOWN (PRESERVED) --- */
+.custom-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 1000;
+  border: 1px solid #e2e8f0;
+}
+
+.custom-dropdown-item {
+  padding: 12px 15px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #1b263b;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s ease;
+}
+
+.custom-dropdown-item:hover {
+  background: #f8f9fa;
+  color: #C5A059;
+}
+
+/* --- SUBMIT BUTTON --- */
+.form-actions {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.primary-action-btn {
+  background-color: #1b263b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(27, 38, 59, 0.2);
+}
+
+.primary-action-btn:hover:not(:disabled) {
+  background-color: #C5A059;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(197, 160, 89, 0.3);
+}
+
+.primary-action-btn:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================================
+   📱 MOBILE RESPONSIVENESS (Post Property)
+   ========================================= */
+@media (max-width: 768px) {
+  
+  /* --- 1. NEW: Header & Badge Fix --- */
+  .post-property-header h1 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+    margin-bottom: 15px;
+  }
+
+  .post-property-header p {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 10px; 
+  }
+
+  /* --- 2. EXISTING: Container & Layout --- */
+  .post-property-container {
+    padding: 30px 20px;
+    margin: 20px;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr; /* Stack segmented controls on mobile */
+  }
+
+  .photo-upload-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* --- 3. EXISTING: Segmented Buttons --- */
+  .segmented-control {
+    width: 100%;
+    display: flex;
+  }
+
+  .segment-btn {
+    flex: 1; /* Make buttons stretch evenly on mobile */
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+

@@ -1,0 +1,477 @@
+/* --- HERO SECTION WRAPPER --- */
+.premium-hero-section {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%); /* Edge-to-edge hack */
+  height: 70vh; 
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* THE FIX: Removed overflow: hidden; so the dropdown can now escape the box! */
+}
+
+/* --- THE CINEMATIC FADING BACKGROUNDS --- */
+.hero-slider-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0; 
+  z-index: 1;
+  transition: opacity 1.5s ease-in-out; 
+}
+
+.hero-slider-bg.active {
+  opacity: 1;
+  animation: subtleZoom 10s ease-in-out forwards;
+}
+
+@keyframes subtleZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); } 
+}
+
+/* --- NEW BACKGROUND CLIPPER --- */
+.hero-bg-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* This locks the zooming image inside! */
+  z-index: 1;
+  border-radius: inherit; /* Just in case you ever want rounded corners */
+}
+
+/* --- THE OVERLAY --- */
+.hero-dark-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(27, 38, 59, 0.5), rgba(27, 38, 59, 0.95));
+  z-index: 2; 
+}
+
+/* --- YOUR CONTENT --- */
+.hero-content-wrapper {
+  position: relative;
+  z-index: 999; /* Merged from dead code to elevate above the background */
+  max-width: 800px;
+  padding: 0 20px;
+  text-align: center;
+  transform: translateY(-20px); 
+}
+
+.hero-content-wrapper h1 {
+  font-size: 4rem; 
+  margin-bottom: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -1px; 
+  color: white;
+}
+
+.hero-content-wrapper p {
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  margin-bottom: 3rem; 
+  font-weight: 300;
+}
+
+.accent-text {
+  color: #C5A059;
+}
+
+/* --- AIRBNB STYLE TABS --- */
+.hero-tabs-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem; 
+}
+
+.hero-tab-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7); 
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 10px 20px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  border-radius: 30px;
+}
+
+.hero-tab-btn:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.15); 
+}
+
+.hero-tab-btn.active {
+  color: white;
+  font-weight: 600;
+}
+
+.hero-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 2px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+/* --- REFINED AIRBNB STYLE SEARCH PILL --- */
+.premium-search-pill-refined {
+  position: relative; 
+  z-index: 1000; /* Pushed up to ensure it hovers over the page below */
+  background: white;
+  border-radius: 60px; 
+  display: flex;
+  align-items: center;
+  max-width: 850px; 
+  margin: 0 auto;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25); 
+  padding: 10px 15px 10px 35px; 
+  text-align: left; 
+}
+
+/* Individual Data Blocks */
+.search-segment-refined {
+  display: flex;
+  flex-direction: column;
+  flex: 1; 
+  padding: 10px 18px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-segment-refined:hover {
+  background: #f7f7f7;
+}
+
+.search-segment-refined label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  margin-bottom: 3px;
+  padding-left: 2px;
+}
+
+.search-segment-refined input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 1.05rem; 
+  color: #333;
+}
+
+.search-segment-refined input::placeholder {
+  color: #8a8a8a;
+}
+
+.search-divider-refined {
+  height: 45px;
+  width: 1px;
+  background-color: #dddddd;
+  margin: 0 5px;
+}
+
+.search-btn-container-refined {
+  padding-left: 15px;
+}
+
+.premium-search-btn-refined {
+  background: var(--accent-gold); 
+  border: none;
+  color: white;
+  height: 55px; 
+  width: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.premium-search-btn-refined:hover {
+  transform: scale(1.05);
+  background: var(--primary-navy); 
+}
+
+/* --- UNIFIED CUSTOM DROPDOWN MENUS --- */
+.custom-input-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.custom-selected-text {
+  width: 100%;
+  font-size: 1.05rem;
+  color: #333;
+  padding-right: 25px; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.custom-select-icon {
+  position: absolute;
+  right: 0;
+  color: #8a8a8a;
+  transition: transform 0.2s ease;
+}
+
+.custom-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 15px); 
+  left: -10px; 
+  width: calc(100% + 40px); 
+  min-width: 220px; 
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: 1001; /* Merged from dead code to sit above EVERYTHING */
+  padding: 10px 0;
+  border: 1px solid #eee;
+}
+
+.custom-dropdown-menu::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-dropdown-menu::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+.custom-dropdown-item {
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--primary-navy);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.2s ease;
+}
+
+.custom-dropdown-item:hover {
+  background: #f8f9fa;
+  color: var(--accent-gold);
+}
+
+/* --- THE SAFETY SWITCHES --- */
+/* Hide the fake pill and modal entirely on Desktop */
+.fake-mobile-search-pill,
+.mobile-search-modal-overlay {
+  display: none;
+}
+
+/* =========================================
+   📱 MOBILE RESPONSIVENESS (Hero & Search)
+   ========================================= */
+@media (max-width: 768px) {
+  /* 1. Lock down the parent containers */
+  .premium-hero-section {
+    width: 100%;
+    overflow: hidden; /* Stops background from bleeding */
+    position: relative;
+  }
+
+ .hero-content-wrapper {
+    padding-top: 40px;
+    width: 100%;
+    padding-left: 15px;  /* Brings back safe mobile padding */
+    padding-right: 15px; 
+    box-sizing: border-box;
+  }
+
+  .hero-content-wrapper h1 {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    text-align: left; /* Ensures "Find" stays on screen */
+  }
+
+/* --- 2. Horizontal Scrollable Tabs --- */
+  .hero-tabs-container {
+    display: flex;
+    justify-content: flex-start !important; /* 🚨 Forces the scroll to start at the absolute left */
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .hero-tabs-container::-webkit-scrollbar { 
+    display: none; 
+  }
+
+  /* 🚨 Catching the inner wrapper just in case it is also centering */
+  .hero-tabs-group {
+    display: flex;
+    justify-content: flex-start !important;
+  }
+  
+  .hero-tabs-divider { 
+    display: none; 
+  }
+
+  /* --- HIDE DESKTOP SEARCH, SHOW FAKE MOBILE PILL --- */
+  .desktop-only-search {
+    display: none !important;
+  }
+
+  .fake-mobile-search-pill {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: #ffffff;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 30px; /* Perfectly round pill */
+    gap: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    cursor: text;
+    margin-top: 10px;
+  }
+
+  .fake-mobile-search-pill span {
+    color: #94a3b8;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+/* --- FULL-SCREEN SEARCH MODAL FIXES --- */
+  .mobile-search-modal-overlay {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ffffff;
+    z-index: 99999 !important; /* 🚨 Massive Z-Index to defeat the Bottom Nav! */
+    animation: slideUp 0.3s ease forwards;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .mobile-search-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .mobile-search-modal-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #1b263b;
+  }
+
+  .close-modal-btn {
+    background: #f1f5f9;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    color: #64748b;
+  }
+
+.mobile-search-modal-body {
+    flex: 1;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch; /* Ensures smooth scrolling on iPhones */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px; 
+  }
+
+  /* 🚨 Kill the Ghost Dividers */
+  .mobile-search-modal-body .search-divider-refined {
+    display: none !important;
+  }
+
+  /* Style the form fields cleanly inside the modal */
+  .mobile-search-modal-body .search-segment-refined {
+    width: 100%;
+  }
+
+  .mobile-search-modal-body input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1.1rem;
+    border: none;
+    border-bottom: 1px solid #e2e8f0;
+    background: transparent;
+  }
+
+  .mobile-search-modal-body .custom-selected-text {
+    font-size: 1.1rem;
+    padding: 10px 0;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .mobile-search-modal-footer {
+    padding: 20px;
+    border-top: 1px solid #e2e8f0;
+    background: #ffffff;
+  }
+
+  .mobile-modal-search-btn {
+    width: 100%;
+    background: #C5A059; /* Your Accent Gold */
+    color: #ffffff;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* --- DEVELOPER CREDIT --- */
+.footer-developer-credit {
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.footer-developer-credit a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.footer-developer-credit a:hover {
+  color: #C5A059; /* Gives your name that premium gold hover effect */
+}

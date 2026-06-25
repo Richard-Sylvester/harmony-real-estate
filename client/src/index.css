@@ -1,0 +1,54 @@
+:root {
+  --primary-navy: #1B263B;
+  --accent-gold: #C5A059;
+  --slate-grey: #415A77;
+  --bg-light: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--primary-navy);
+}
+
+.accent-text {
+  color: var(--accent-gold);
+}
+
+.divider {
+  height: 1px;
+  background: #eee;
+  margin: 1.5rem 0;
+}
+
+.btn-primary {
+  background-color: var(--accent-gold);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+/* =========================================
+   📱 GLOBAL MOBILE RESPONSIVENESS
+   ========================================= */
+@media (max-width: 768px) {
+  html, body {
+    /* Prevents the entire website from sliding left/right on mobile */
+    overflow-x: hidden; 
+    width: 100%;
+  }
+
+  /* Make standard buttons stretch to fit the thumb on mobile */
+  .btn-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px; 
+  }
+}

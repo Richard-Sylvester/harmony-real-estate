@@ -1,0 +1,134 @@
+/* --- MAP MAIN SECTION WRAPPER --- */
+.map-section-wrapper {
+  max-width: 1250px; 
+  margin: 60px auto 90px auto; 
+  padding: 0 30px; 
+}
+
+/* --- SECTION HEADER TYPOGRAPHY --- */
+.map-section-header {
+  margin-bottom: 25px;
+}
+
+.map-section-header h2 {
+  font-size: 1.6rem;
+  color: #1b263b; 
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+.map-header-line {
+  width: 50px;
+  height: 3px;
+  background-color: #C5A059; 
+  border-radius: 2px;
+}
+
+/* --- THE PREMIUM CONTAINER FRAME --- */
+.premium-map-frame {
+  position: relative;
+  border-radius: 16px; 
+  overflow: hidden; 
+  box-shadow: 0 10px 30px rgba(27, 38, 59, 0.06); 
+  border: 1px solid #e2e8f0; 
+  border-top: 4px solid #C5A059; 
+}
+
+/* --- TARGETING THE LEAFLET MAP LAYER --- */
+.premium-map-frame .leaflet-container {
+  width: 100%;
+  height: 440px !important; 
+  z-index: 1; 
+  font-family: inherit;
+}
+
+/* --- RE-STYLING THE DEFAULT LEAFLET ZOOM CONTROLS --- */
+.premium-map-frame .leaflet-bar {
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+}
+
+.premium-map-frame .leaflet-bar a {
+  background-color: #ffffff !important;
+  color: #1b263b !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  transition: all 0.2s ease;
+}
+
+.premium-map-frame .leaflet-bar a:hover {
+  color: #C5A059 !important; 
+  background-color: #f8fafc !important;
+}
+
+/* --- RESPONSIVE FIXES --- */
+@media (max-width: 768px) {
+  .map-section-wrapper {
+    margin: 40px auto 60px auto;
+    padding: 0 20px;
+  }
+  
+  .premium-map-frame .leaflet-container {
+    height: 350px !important; 
+  }
+}
+
+/* --- FULLSCREEN TOGGLE BUTTON --- */
+.fullscreen-toggle-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 1000; /* Keeps it above the map tiles (Leaflet is z-index: 400) */
+  background: white;
+  border: 1px solid #cbd5e1;
+  padding: 10px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #1b263b;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.fullscreen-toggle-btn:hover {
+  background: #f8fafc;
+  color: #C5A059;
+  border-color: #C5A059;
+}
+
+/* --- FULLSCREEN MODE OVERRIDES --- */
+.map-section-wrapper.is-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  z-index: 9999; /* Forces it over the Navbar and everything else */
+  background: white;
+}
+
+/* Strip away the borders and radius so it touches the screen edges */
+.map-section-wrapper.is-fullscreen .premium-map-frame {
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  height: 100vh;
+}
+
+/* Force the Leaflet canvas to fill the screen */
+.map-section-wrapper.is-fullscreen .leaflet-container {
+  height: 100vh !important;
+}
+
+/* --- ALIGNING ZOOM CONTROLS WITH OUR CUSTOM UI --- */
+.premium-map-frame .leaflet-top.leaflet-right .leaflet-control-zoom {
+  margin-top: 70px; /* Pushes it down so it clears the Expand Map button */
+  margin-right: 15px; /* Aligns it perfectly with the right edge of the Expand Map button */
+}

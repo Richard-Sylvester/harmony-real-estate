@@ -1,0 +1,55 @@
+/* 1. THE SAFETY SWITCH: Hide entirely on desktop monitors */
+@media (min-width: 769px) {
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+}
+
+/* 2. THE MOBILE APP STYLING */
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 70px;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.05);
+    border-top: 1px solid #f1f5f9;
+    z-index: 9999;
+    
+    /* Pro-tip: This prevents the bar from hiding under the iPhone gesture swipe line! */
+    padding-bottom: env(safe-area-inset-bottom); 
+  }
+
+  .nav-icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #64748b; /* Slate Gray */
+    font-size: 0.75rem;
+    font-weight: 500;
+    gap: 4px;
+    flex: 1;
+    transition: color 0.2s;
+  }
+
+  .nav-icon-wrapper:hover {
+    color: #1B263B;
+  }
+
+  /* Highlights the icon based on the current page */
+  .nav-icon-wrapper.active {
+    color: #C5A059; /* Your Accent Gold */
+    font-weight: 700;
+  }
+
+  .post-btn {
+    color: #1B263B; /* Makes the "Sell" button pop a bit more */
+  }
+}

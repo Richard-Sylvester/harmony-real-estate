@@ -1,8 +1,8 @@
-# Harmony Real Estate
+#  Harmony Real Estate
 
 Harmony is a premium, full-stack real estate platform built with the MERN stack. It connects verified buyers, sellers, and renters with properties across the city. The application features a native-feeling adaptive mobile design, secure authentication, and a robust property management dashboard.
 
-## Key Features
+##  Key Features
 
 **For Buyers & Renters:**
 * [cite_start]**Advanced Filtering:** Dynamic search Mega Menu with mutually exclusive tabs for Buy, Rent, PG, and Commercial properties[cite: 962, 963, 964, 1022].
@@ -20,7 +20,7 @@ Harmony is a premium, full-stack real estate platform built with the MERN stack.
 * [cite_start]**Enterprise Security:** Backend protected against NoSQL injections and metadata scraping using `helmet` and `express-mongo-sanitize`[cite: 444, 445, 446].
 * [cite_start]**Authentication:** Secure login and registration using JWT and bcrypt password hashing[cite: 443].
 
-## Tech Stack
+##  Tech Stack
 
 * **Frontend:** React.js (Vite), Custom CSS, React Router, Lucide React (Icons), Axios
 * **Backend:** Node.js, Express.js
@@ -28,7 +28,7 @@ Harmony is a premium, full-stack real estate platform built with the MERN stack.
 * **Media Management:** Cloudinary API, Multer
 * **Task Scheduling:** Node-Cron
 
-## Getting Started
+##  Getting Started
 
 ### Prerequisites
 * Node.js installed on your machine

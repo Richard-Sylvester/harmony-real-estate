@@ -10,21 +10,21 @@
 /* --- THE MOBILE STYLING --- */
 @media (max-width: 768px) {
   
-  /* --- STICKY TOP BAR --- */
+/* --- STICKY TOP BAR --- */
   .mobile-header-container {
     position: sticky;
     top: 0;
     left: 0;
     right: 0;
     height: 60px;
-    background: #ffffff;
+    background: #1b263b; /* 🚨 THE FIX: Premium Harmony Navy */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 15px;
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-bottom: 3px solid #C5A059; /* 🚨 The Signature Gold Line */
   }
 
   .header-left-group {
@@ -36,7 +36,7 @@
   .hamburger-btn {
     background: none;
     border: none;
-    color: #1B263B;
+    color: #ffffff; /* 🚨 White hamburger icon so it pops on Navy */
     padding: 0;
     display: flex;
     align-items: center;
@@ -45,25 +45,27 @@
   .mobile-logo-img {
     height: 30px;
     width: auto;
+    /* 🚨 Turns the logo precisely to Harmony Gold */
+    filter: brightness(0) saturate(100%) invert(71%) sepia(21%) saturate(769%) hue-rotate(6deg) brightness(95%) contrast(88%);
   }
 
   .mobile-post-btn {
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
+    background-color: #C5A059; /* 🚨 Gold Button */
+    border: none;
     padding: 6px 12px;
     border-radius: 20px;
-    color: #1B263B;
+    color: #1b263b; /* Navy Text */
     text-decoration: none;
     font-size: 0.8rem;
-    font-weight: 600;
+    font-weight: 700;
     display: flex;
     align-items: center;
     gap: 6px;
   }
 
   .free-badge {
-    background-color: #fef08a; /* Magicbricks yellow */
-    color: #854d0e;
+    background-color: #1b263b; /* Navy Badge inside the Gold Button */
+    color: #ffffff; 
     font-size: 0.6rem;
     padding: 2px 6px;
     border-radius: 10px;

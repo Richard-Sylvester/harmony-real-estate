@@ -17,6 +17,7 @@ const PropertyDetails = () => {
   
   // Lightbox State
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     const fetchProperty = async () => {
@@ -31,6 +32,53 @@ const PropertyDetails = () => {
     };
     fetchProperty();
   }, [id]);
+
+  // 1. Check if saved on load
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (userInfo && userInfo.savedProperties) {
+      setIsSaved(userInfo.savedProperties.includes(id));
+    }
+  }, [id]);
+
+  // 2. The Heart Button Logic
+  const handleToggleSave = async () => {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!userInfo) return alert("Please log in to save properties!");
+
+    try {
+      setIsSaved(!isSaved); // Optimistic UI flip
+      const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
+      const { data } = await axios.post(`/api/users/saved/${id}`, {}, config);
+      
+      const updatedUser = { ...userInfo, savedProperties: data.savedProperties };
+      localStorage.setItem('userInfo', JSON.stringify(updatedUser));
+    } catch (error) {
+      console.error("Error toggling save:", error);
+      setIsSaved(isSaved); // Revert on failure
+    }
+  };
+
+  // 3. The Native Share Logic
+  const handleShare = async () => {
+    const shareData = {
+      title: property?.title || 'Harmony Real Estate',
+      text: 'Check out this amazing property!',
+      url: window.location.href
+    };
+
+    // If on mobile, open native share sheet. If on desktop, copy to clipboard!
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (error) {
+        console.error("Error sharing:", error);
+      }
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert("Property link copied to clipboard!");
+    }
+  };
 
   // Lightbox Navigation Logic
   const nextImage = (e) => {
@@ -98,8 +146,21 @@ const PropertyDetails = () => {
             <div className="header-top-row">
               <h1 className="property-main-title">{property.title}</h1>
               <div className="header-actions">
-                <button className="icon-action-btn"><Share2 size={20} /></button>
-                <button className="icon-action-btn"><Heart size={20} /></button>
+                <div className="header-actions">
+                {/* WIRED SHARE BUTTON */}
+                <button className="icon-action-btn" onClick={handleShare}>
+                  <Share2 size={20} />
+                </button>
+                
+                {/* WIRED HEART BUTTON */}
+                <button className="icon-action-btn" onClick={handleToggleSave}>
+                  <Heart 
+                    size={20} 
+                    fill={isSaved ? '#ef4444' : 'transparent'} 
+                    color={isSaved ? '#ef4444' : 'currentColor'} 
+                  />
+                </button>
+              </div>
               </div>
             </div>
             <p className="property-full-address"><MapPin size={18} /> {property.fullAddress || property.location}</p>

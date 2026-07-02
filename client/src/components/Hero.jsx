@@ -134,19 +134,20 @@ const Hero = () => {
     }
   };
 
-  const handleActionClick = (action) => {
-    setActiveAction(action); 
+ const handleActionClick = (action) => {
+    setActiveAction(action);
     
-    // INSTANT RESET: Clear out the old dropdown selections
+    // 1. INSTANT RESET: Clear out ALL local input states
+    setLocation(''); // 🚨 Added this to wipe the visual search bar
     setPropertyType('Any Type');
     setBudgetLabel('No Limit');
     setBudgetValue('');
     
-    const params = new URLSearchParams(window.location.search);
+    // 2. THE URL NUKE: Create a completely fresh URL with ONLY the new tab action
+    const params = new URLSearchParams();
     params.set('activeAction', action);
-    params.delete('type');
-    params.delete('budget');
     
+    // 3. Push the clean URL to the browser and scroll down
     navigate(`/?${params.toString()}`);
     document.getElementById('properties-section')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -154,15 +155,19 @@ const Hero = () => {
   const handleSearch = () => {
     const params = new URLSearchParams();
     if (location) params.append('location', location);
-    
-    // CRITICAL FIX: Send the exact full string to the backend! No splitting!
-    if (propertyType !== 'Any Type') params.append('type', propertyType); 
-    
+    if (propertyType !== 'Any Type') params.append('type', propertyType);
     if (budgetValue) params.append('budget', budgetValue);
-    if (activeAction) params.append('activeAction', activeAction);
+    if (activeAction) params.append('activeAction', activeAction); 
 
     navigate(`/?${params.toString()}`);
     document.getElementById('properties-section')?.scrollIntoView({ behavior: 'smooth' });
+
+    // --- 🚨 THE FIX: AUTO-CLEAR SEARCH BAR ---
+    // Wipes the inputs clean immediately after the search fires
+    setLocation('');
+    setPropertyType('Any Type');
+    setBudgetLabel('No Limit');
+    setBudgetValue('');
   };
 
   const currentTypes = dynamicOptions[activeAction].types;

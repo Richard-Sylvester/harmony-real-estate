@@ -7,11 +7,10 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px); /* The Glassmorphism blur */
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: #1b263b; /* 🚨 THE FIX: Harmony Premium Navy */
+  border-bottom: 3px solid #C5A059; /* A slick gold accent line at the bottom */
   padding: 0 20px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
 .navbar-container {
@@ -28,19 +27,15 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  /* Ensures the link tag doesn't restrict the image size */
-  height: 100%; 
+  height: 100%;
 }
 
 .brand-logo-img {
-  height: 70px; /* Takes up almost the full 80px container height */
+  height: 70px;
   width: auto;
   object-fit: contain;
-  /* Pro-tip: If your PNG file has a lot of invisible empty space 
-     around the logo itself, uncomment the line below to physically 
-     scale it up without changing the container size! */
- /* transform: scale(1.15);*/
-  /* margin-left: -10px; */ /* Uncomment to pull it slightly left if needed */
+  /* 🚨 THE GOLD FIX: This specific filter chain precisely calculates #C5A059 */
+  filter: brightness(0) saturate(100%) invert(71%) sepia(21%) saturate(769%) hue-rotate(6deg) brightness(95%) contrast(88%);
 }
 
 /* --- MIDDLE LINKS --- */
@@ -50,16 +45,28 @@
   align-items: center;
 }
 
-.navbar-links a {
+.navbar-links a, 
+.nav-link-text {
   text-decoration: none;
-  color: #415A77;
+  color: #ffffff !important; /* 🚨 THE VISIBILITY FIX: Forces the text to be stark white */
   font-weight: 500;
   font-size: 1.05rem;
   transition: color 0.2s ease;
 }
 
-.navbar-links a:hover {
-  color: #C5A059;
+.navbar-links a:hover, 
+.mega-dropdown:hover .nav-link-text {
+  color: #C5A059 !important; /* Harmony Gold on hover */
+}
+
+.nav-link-text svg {
+  color: #ffffff !important; /* 🚨 Makes the little dropdown arrows white too! */
+  transition: transform 0.3s ease;
+}
+
+.mega-dropdown:hover .nav-link-text svg {
+  transform: rotate(180deg);
+  color: #C5A059 !important;
 }
 
 /* --- RIGHT SIDE AUTH ZONE --- */
@@ -72,13 +79,13 @@
 .nav-divider {
   width: 1px;
   height: 30px;
-  background-color: #e2e8f0;
+  background-color: rgba(255, 255, 255, 0.2); /* Soft, semi-transparent white divider */
 }
 
 /* Post Property Button */
 .nav-post-btn {
   text-decoration: none;
-  color: #1b263b;
+  color: #ffffff; /* White text */
   font-weight: 600;
   font-size: 0.95rem;
   display: flex;
@@ -92,8 +99,8 @@
 }
 
 .free-tag {
-  background-color: #ecfdf5;
-  color: #10b981;
+  background-color: #C5A059; /* Gold Tag */
+  color: #1b263b; /* Navy Text */
   padding: 2px 6px;
   border-radius: 4px;
   font-size: 0.7rem;
@@ -109,25 +116,33 @@
 
 .nav-login-link {
   text-decoration: none;
-  color: #1b263b;
+  color: #ffffff; /* White text */
   font-weight: 600;
   font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.nav-login-link:hover {
+  color: #C5A059;
 }
 
 .nav-signup-btn {
   text-decoration: none;
-  background-color: #1b263b;
-  color: white;
+  background-color: #C5A059; /* 🚨 Bright Gold Button */
+  color: #1b263b; /* Navy Text */
   padding: 10px 20px;
   border-radius: 8px;
-  font-weight: 600;
+  font-weight: 700;
   transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(197, 160, 89, 0.2);
 }
 
 .nav-signup-btn:hover {
-  background-color: #C5A059;
+  background-color: #ffffff; /* Flips to white on hover */
   transform: translateY(-2px);
 }
+
+/* ... Keep your exact User Pill and Mega Menu Dropdown CSS below this line! ... */
 
 /* --- LOGGED IN USER PILL --- */
 .user-menu-container {
@@ -348,17 +363,19 @@
   padding-bottom: 12px;
 }
 
+/* --- MEGA MENU LINKS (Visibility Fix) --- */
 .mega-column a {
-  color: #666; 
+  color: #475569 !important; /* 🚨 THE FIX: Forces dropdown links back to dark slate grey! */
   text-decoration: none;
-  font-size: 1.05rem; 
-  margin-bottom: 20px; 
-  transition: color 0.2s, transform 0.2s; 
+  font-size: 1.05rem;
+  margin-bottom: 20px;
+  display: block; /* Ensures they sit on their own line */
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .mega-column a:hover {
-  color: #C5A059; 
-  transform: translateX(4px); 
+  color: #C5A059 !important; /* Harmony Gold on hover */
+  transform: translateX(4px);
   font-weight: 500;
 }
 

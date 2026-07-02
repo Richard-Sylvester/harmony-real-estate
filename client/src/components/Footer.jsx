@@ -26,41 +26,47 @@ const Footer = () => {
 
         {/* Column 2: Quick Links */}
         <div className="footer-col">
-          <h3>Quick Links</h3>
+          <h3>Company</h3>
           <ul className="footer-links">
+            <li><Link to="/about">About Us</Link></li>
+            <li><Link to="/careers">Testimonials</Link></li>
             <li><Link to="/search?type=Sell">Buy a Property</Link></li>
             <li><Link to="/search?type=Rent">Rent a Property</Link></li>
             <li><Link to="/post-property">List Your Property</Link></li>
-            <li><Link to="/dashboard">My Dashboard</Link></li>
           </ul>
         </div>
 
         {/* Column 3: Legal & Support */}
         <div className="footer-col">
-          <h3>Support</h3>
+          <h3>Support & Legal</h3>
           <ul className="footer-links">
-            <li><Link to="#">Help Center</Link></li>
-            <li><Link to="#">Terms of Service</Link></li>
-            <li><Link to="#">Privacy Policy</Link></li>
-            <li><Link to="#">Fraud Alert</Link></li>
+            <li><Link to="/legal#help">Help Center</Link></li>
+            <li><Link to="/legal#feedback">Feedback</Link></li>
+            <li><Link to="/legal#terms">Terms of Service</Link></li>
+            <li><Link to="/legal#privacy">Privacy Policy</Link></li>
+            <li><Link to="/legal#fraud">Fraud Alert</Link></li>
           </ul>
         </div>
 
-        {/* Column 4: Contact Info */}
-        <div className="footer-col contact-col">
+        {/* Column 4: Contact Us (NOW CLICKABLE!) */}
+        <div className="footer-col">
           <h3>Contact Us</h3>
           <ul className="footer-contact-info">
             <li>
-              <MapPin size={18} className="contact-icon" />
-              <span>124 Prestige Tower, MG Road,<br/>Bengaluru, Karnataka 560001</span>
+              <MapPin className="contact-icon" size={20} />
+              <a href="https://maps.google.com/?q=124+Prestige+Tower,+MG+Road,+Bengaluru,+Karnataka+560001" target="_blank" rel="noopener noreferrer" className="contact-link">
+                124 Prestige Tower, MG Road,<br />Bengaluru, Karnataka 560001
+              </a>
             </li>
             <li>
-              <Phone size={18} className="contact-icon" />
-              <span>+91 91106 21925</span>
+              <Phone className="contact-icon" size={20} />
+              <a href="tel:+919110621925" className="contact-link">+91 91106 21925</a>
             </li>
             <li>
-              <Mail size={18} className="contact-icon" />
-              <span>support@harmonyrealestate.com</span>
+              <Mail className="contact-icon" size={20} />
+              <a href="mailto:support@harmonyrealestate.com" className="contact-link">
+                support@harmonyrealestate.com
+              </a>
             </li>
           </ul>
         </div>
@@ -69,7 +75,7 @@ const Footer = () => {
 
       {/* Bottom Copyright Bar */}
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} Harmony Real Estate. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Harmony Estate And Developers. All rights reserved.</p>
         
         {/* --- YOUR DEVELOPER CREDIT --- */}
         <p className="footer-developer-credit">

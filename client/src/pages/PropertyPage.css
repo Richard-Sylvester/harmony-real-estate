@@ -464,26 +464,101 @@
   to { opacity: 1; transform: scale(1); }
 }
 
-/* --- MOBILE RESPONSIVENESS --- */
-@media (max-width: 900px) {
-  .details-layout {
-    flex-direction: column;
-  }
-  .sidebar-column {
-    position: static;
-    width: 100%;
-  }
-  .gallery-container {
-    height: 300px;
-  }
-}
-
 @media (max-width: 768px) {
+  /* --- STACK THE MAIN LAYOUT ON MOBILE --- */
+  .details-layout {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  .main-content-column,
+  .sidebar-column {
+    width: 100% !important;
+    flex: none !important; /* Kills the desktop flex proportions */
+  }
+
+  .sidebar-column {
+    position: static !important; /* Turns off the sticky scroll on phones */
+    margin-top: 20px !important;
+  }
+  
+  /* --- 1. HERO IMAGE MOBILE FIX --- */
+  .gallery-container {
+    height: 260px !important; /* Perfect height for an app-style banner */
+    border-radius: 12px;
+  }
+
+  /* Hide the side-grid on mobile, let the main image take full width */
+  .sub-images-grid {
+    display: none !important; 
+  }
+
+  .gallery-container.has-grid .main-image-wrap {
+    width: 100% !important;
+    flex: none !important;
+  }
+
+  .gallery-img {
+    object-fit: cover !important; 
+    width: 100% !important;
+  }
+
+  /* --- 2. THE SWALLOWED BOTTOM FIX --- */
+  .property-details-page {
+    /* 120px gives plenty of clearance above the bottom navigation bar */
+    padding-bottom: 120px !important; 
+    padding-top: 15px !important;
+  }
+
+  /* --- 3. MOBILE TYPOGRAPHY & SPACING POLISH --- */
+  .property-main-title {
+    font-size: 1.5rem !important;
+  }
+
+  .property-price-display {
+    font-size: 1.8rem !important;
+  }
+
+  .content-card, .sticky-contact-card {
+    padding: 20px !important; /* Reduces massive desktop padding to fit phones */
+  }
+
+  /* --- 4. LIGHTBOX NAV (Existing) --- */
   .lightbox-nav {
     width: 45px;
     height: 45px;
   }
   .lightbox-nav.left { left: 10px; }
   .lightbox-nav.right { right: 10px; }
-  .lightbox-close { top: 20px; right: 20px; }
+  .lightbox-close { top: 20px; right: 20px; 
+  }
+
+ /* --- 5. OVERVIEW GRID MOBILE FIX --- */
+  .highlights-grid {
+    grid-template-columns: 1fr 1fr !important; /* Forces 2 perfectly equal columns */
+    gap: 15px !important; /* Kills the massive 30px desktop gap */
+  }
+
+  .highlight-item {
+    gap: 10px !important; /* Brings the text closer to the icon */
+    align-items: flex-start !important; /* Aligns text to the top of the icon if it wraps */
+  }
+
+  .hl-icon {
+    width: 38px !important; /* Shrinks the desktop icons down for mobile */
+    height: 38px !important;
+    flex-shrink: 0; /* Prevents the icon from getting squished by the text */
+  }
+
+  /* Scale the typography down to fit the tight mobile columns */
+  .hl-label {
+    font-size: 0.75rem !important;
+    margin-bottom: 2px !important;
+  }
+
+  .hl-value {
+    font-size: 0.9rem !important;
+    word-break: break-word; /* Prevents long words from bleeding out of the column */
+    line-height: 1.3;
+  }
 }

@@ -15,6 +15,8 @@ import EditProperty from './pages/EditProperty';
 import BottomNav from './components/BottomNav';
 import MobileHeader from './components/MobileHeader';
 import AdminRoute from './components/AdminRoute';
+import LegalPage from './pages/LegalPage';
+import AboutUs from './pages/AboutUs';
 import './App.css';
 
 function App() {
@@ -47,6 +49,14 @@ function App() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/edit-property/:id" element={<EditProperty />} />
           <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+
+          {/* LEGAL & COMPANY ROUTES */}
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/testimonials" element={<div style={{ padding: '100px', textAlign: 'center' }}><h2>Testimonials</h2><p>Coming soon...</p></div>} />
+          <Route path="/help-center" element={<div style={{ padding: '100px', textAlign: 'center' }}><h2>Help Center</h2><p>Coming soon...</p></div>} />
+          <Route path="/feedback" element={<div style={{ padding: '100px', textAlign: 'center' }}><h2>Feedback</h2><p>Coming soon...</p></div>} />
+          {/* --- LEGAL & SUPPORT --- */}
+          <Route path="/legal" element={<LegalPage />} />
         </Routes>
       </main>
       <WhatsAppWidget />

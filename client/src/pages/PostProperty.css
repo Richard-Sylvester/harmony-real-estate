@@ -511,15 +511,78 @@ body {
   box-shadow: 0 6px 15px rgba(37, 211, 102, 0.2);
 }
 
-/* --- MOBILE RESPONSIVENESS FIX --- */
+/* =========================================
+   📱 MOBILE RESPONSIVENESS (PostProperty)
+   ========================================= */
 @media (max-width: 768px) {
+  
+  /* 1. Layout Stacking & Container Spacing */
   .post-property-layout {
-    flex-direction: column; 
+    flex-direction: column !important;
+    gap: 20px;
   }
+
+  .post-property-container {
+    padding: 20px 15px !important; 
+  }
+
+  .form-column {
+    padding: 25px 15px !important; 
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
   .help-column {
-    width: 100%;
-    position: static; 
-    margin-top: 20px; /* Gives the card breathing room below the form on mobile */
+    width: 100% !important;
+    position: static !important; 
+  }
+
+  /* 2. 🚨 THE OVERFLOW FIXES (Radio Buttons & Inputs) */
+  .radio-group {
+    flex-wrap: wrap !important;
+    gap: 15px !important; 
+    height: auto !important;
+  }
+
+  .input-wrapper, 
+  .material-input {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 3. 🚨 THE PHOTO BANNER STACK FIX */
+  .photo-upload-banner {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 15px !important;
+  }
+
+  /* 4. Grid & Segment Button Fixes */
+  .features-grid {
+    grid-template-columns: 1fr !important; 
+    gap: 20px !important;
+  }
+
+  .area-input-group {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+  }
+  
+  .segmented-control {
+    flex-wrap: wrap !important;
+    gap: 5px !important;
+  }
+
+  .segment-btn {
+    flex: 1 1 calc(33% - 5px) !important; 
+    padding: 10px !important;
+    font-size: 0.9rem !important;
+  }
+
+  /* 5. Typography Scale-Down */
+  .post-property-header h1 {
+    font-size: 1.5rem !important;
   }
 }
-

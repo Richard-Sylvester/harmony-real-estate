@@ -14,6 +14,7 @@ import WhatsAppWidget from './components/WhatsAppWidget';
 import EditProperty from './pages/EditProperty';
 import BottomNav from './components/BottomNav';
 import MobileHeader from './components/MobileHeader';
+import AdminRoute from './components/AdminRoute';
 import './App.css';
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/edit-property/:id" element={<EditProperty />} />
+          <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
         </Routes>
       </main>
       <WhatsAppWidget />

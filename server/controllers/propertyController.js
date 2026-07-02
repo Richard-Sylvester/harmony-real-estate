@@ -5,6 +5,13 @@ const Property = require('../models/Property');
 const createProperty = async (req, res) => {
     const { title, description, type, category, price, location, locationData, amenities, images } = req.body;
 
+    // --- NEW: THE ADMIN INTERCEPTOR ---
+    // If the logged-in user is an admin, it's company-owned. Otherwise, it's false.
+    const isCompanyOwned = req.user && req.user.isAdmin ? true : false;
+    
+    // Admins bypass the pending queue and go live instantly! Normal users go to pending (false).
+    const isApproved = req.user && req.user.isAdmin ? true : false; 
+
     const property = new Property({
         user: req.user._id, // Taken from the "protect" middleware
         title,
@@ -15,11 +22,19 @@ const createProperty = async (req, res) => {
         location,
         locationData,
         amenities,
-        images
+        images,
+        // --- NEW: INJECT THE PREMIUM FLAGS ---
+        isCompanyOwned,
+        isApproved 
     });
 
-    const createdProperty = await property.save();
-    res.status(201).json(createdProperty);
+    try {
+        const createdProperty = await property.save();
+        res.status(201).json(createdProperty);
+    } catch (error) {
+        console.error("Failed to create property:", error);
+        res.status(500).json({ message: "Server Error creating property" });
+    }
 };
 
 // @desc    Fetch all properties (with filtering!)
@@ -27,9 +42,11 @@ const createProperty = async (req, res) => {
 // @access  Public
 const getProperties = async (req, res) => {
     try {
-        // 1. Start with an empty query object
-        let query = {};
-
+        // 1. Start with the foundational rules!
+        // ONLY fetch properties that are approved by admin AND are marked as 'Available'
+        let query = {
+            isApproved: true
+        };
         // 2. Catch the Exact Match filters
         if (req.query.type) query.type = req.query.type; // 'Sell' or 'Rent'
         if (req.query.category) query.category = req.query.category; // 'Villa', 'Flat', etc.

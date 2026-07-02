@@ -67,6 +67,7 @@ const googleAuth = async (req, res) => {
                 name: user.name,
                 email: user.email,
                 role: user.role,
+                isAdmin: user.isAdmin,
                 token: generateToken(user._id),
             });
         } else {

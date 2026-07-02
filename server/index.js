@@ -16,6 +16,7 @@ app.use(express.json());
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/properties', require('./routes/propertyRoutes'));
 app.use('/api/upload', require('./routes/uploadRoutes')); // New route for image uploads
+app.use('/api/admin', require('./routes/adminRoutes'));
 
 // Database Connection Logic
 const connectDB = async () => {

@@ -38,7 +38,21 @@ const propertySchema = mongoose.Schema({
         type: String, 
         enum: ['Available', 'Sold', 'Rented'], 
         default: 'Available' 
+    },
+    // --- NEW: ADMIN MODERATION LEVERS ---
+    isApproved: { 
+      type: Boolean, 
+      default: false // Set to false so new posts are hidden until an admin reviews them
+    },
+    isFeatured: { 
+      type: Boolean, 
+      default: false // Allows admin to pin specific properties to the top of the homepage
+    },
+    isCompanyOwned: { 
+      type: Boolean, 
+      default: false // Flags properties posted directly by Harmony Admins
     }
-}, { timestamps: true });
+  },
+ { timestamps: true });
 
 module.exports = mongoose.model('Property', propertySchema);

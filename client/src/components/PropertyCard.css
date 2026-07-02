@@ -87,6 +87,43 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
+/* --- PREMIUM PROPERTY BADGES --- */
+.premium-badge-container {
+  position: absolute;
+  bottom: 12px; /* Pins it to the bottom of the image instead of the top */
+  left: 12px;
+  display: flex;
+  flex-direction: column; 
+  gap: 8px;
+  z-index: 2;
+}
+
+.premium-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 0.70rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px); 
+  width: max-content; /* Ensures the badge only takes up exactly the space it needs */
+}
+
+/* Gold for Featured */
+.badge-gold {
+  background-color: rgba(197, 160, 89, 0.95); 
+  color: #ffffff;
+}
+
+/* Dark Blue for Company Owned */
+.badge-verified {
+  background-color: rgba(27, 38, 59, 0.95); 
+  color: #C5A059;
+  border: 1px solid #C5A059;
+}
+
 /* --- VIEW DETAILS SLIDE-UP MICRO-INTERACTION --- */
 /* 1. Add a subtle shadow gradient to the bottom of the image on hover */
 .card-image-wrapper::after {

@@ -70,7 +70,17 @@ const PropertyCard = ({ property }) => {
         <div className="card-image-wrapper">
           <img src={imageUrl} alt={property.title} className="card-image" />
           
-          {/* --- UPDATED DYNAMIC BADGE --- */}
+          {/* --- NEW: PREMIUM BADGES (Pinned to bottom-left) --- */}
+          <div className="premium-badge-container">
+            {property.isFeatured && (
+              <span className="premium-badge badge-gold">★ Featured</span>
+            )}
+            {property.isCompanyOwned && (
+              <span className="premium-badge badge-verified">✓ Harmony Owned</span>
+            )}
+          </div>
+
+          {/* --- EXISTING DYNAMIC BADGE (For Rent/Sale) --- */}
           {isAvailable ? (
             <div className={`card-badge ${isRent ? 'badge-rent' : 'badge-sell'}`}>
               {isRent ? 'For Rent' : 'For Sale'}
@@ -81,15 +91,11 @@ const PropertyCard = ({ property }) => {
             </div>
           )}
 
-          {/* --- UPDATED: Perfectly syncs React State with your Custom CSS --- */}
+          {/* --- EXISTING HEART BUTTON --- */}
           <button className="card-heart-btn" onClick={handleToggleSave}>
             <Heart 
               size={20} 
-              // 1. If saved, fill it gold. If not, leave it empty.
               fill={isSaved ? '#ef4444' : 'transparent'} 
-              
-              // 2. The Magic Trick: 'currentColor' tells the icon to look at your CSS!
-              // If it's not saved, it will be #8a8a8a, and it will turn red (#ef4444) on hover!
               color={isSaved ? '#ef4444' : 'currentColor'} 
             />
           </button>

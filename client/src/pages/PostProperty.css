@@ -323,49 +323,203 @@ body {
 }
 
 /* =========================================
-   📱 MOBILE RESPONSIVENESS (Post Property)
+   TWO-COLUMN LAYOUT & HELP CARD
    ========================================= */
+
+/* 1. The Canvas: Add a subtle gray to the whole page so the white cards POP */
+body {
+  background-color: #f8fafc; /* Standard enterprise background color */
+}
+
+/* 2. The Global Container */
+.post-property-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px; 
+  /* 🚨 Kills any old borders or white backgrounds from previous code */
+  background: transparent !important; 
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 3. The Flexbox Split */
+.post-property-layout {
+  display: flex;
+  gap: 30px; 
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* 4. THE LEFT CARD (The Form) */
+.form-column {
+  flex: 1; 
+  min-width: 0; 
+  
+  /* 🚨 The Premium Card Styling */
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+  padding: 40px; /* Gives the form beautiful breathing room */
+}
+
+/* Clean up the newly moved header so it divides nicely from the form */
+.post-property-header {
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 25px;
+  margin-bottom: 30px;
+}
+
+.post-property-header h1 {
+  font-size: 1.8rem;
+  color: #1b263b;
+  margin: 0 0 10px 0;
+}
+
+/* Force the internal form to fill the new card cleanly */
+.post-property-form {
+  max-width: 100%; 
+  margin: 0; 
+}
+
+/* =========================================
+   5. RIGHT COLUMN & HELP CARD
+   ========================================= */
+
+/* The sticky column wrapper */
+.help-column {
+  width: 340px; 
+  flex-shrink: 0; 
+  position: sticky;
+  top: 100px; 
+}
+
+/* 🚨 RESTORED: The White Box, Border, and Padding */
+.help-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+  padding: 30px 25px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- TEXT & HEADERS --- */
+.help-card-header {
+  margin-bottom: 25px; 
+}
+
+.help-card-header h3 {
+  color: #1b263b;
+  font-size: 1.4rem;
+  margin: 0 0 5px 0;
+}
+
+.help-card-header p {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* --- THE "OR" DIVIDER --- */
+.divider-text {
+  position: relative;
+  text-align: center;
+  margin: 30px 0; 
+  width: 100%; /* Ensures the line stretches across the whole card */
+}
+
+.divider-text::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #e2e8f0;
+  z-index: 1;
+}
+
+.divider-text span {
+  background: white; /* Blends perfectly with the .help-card background! */
+  padding: 0 15px;
+  color: #94a3b8;
+  font-weight: 600;
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* --- PROMO TEXT --- */
+.whatsapp-promo {
+  margin-bottom: 20px; 
+}
+
+.whatsapp-promo p {
+  line-height: 1.5; 
+}
+
+/* --- HELP CARD BUTTONS (With Hover Effects) --- */
+
+.help-btn-call {
+  background-color: #1b263b; /* Harmony Navy */
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.help-btn-call:hover {
+  background-color: #C5A059; /* Harmony Gold on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(197, 160, 89, 0.2);
+}
+
+.help-btn-whatsapp {
+  width: 100%;
+  background-color: white;
+  color: #25D366; /* WhatsApp Green */
+  border: 1px solid #25D366;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(37, 211, 102, 0.1);
+}
+
+.help-btn-whatsapp:hover {
+  background-color: #25D366;
+  color: white; /* Text turns white on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(37, 211, 102, 0.2);
+}
+
+/* --- MOBILE RESPONSIVENESS FIX --- */
 @media (max-width: 768px) {
-  
-  /* --- 1. NEW: Header & Badge Fix --- */
-  .post-property-header h1 {
-    font-size: 1.8rem;
-    line-height: 1.2;
-    margin-bottom: 15px;
-  }
-
-  .post-property-header p {
-    display: flex;
+  .post-property-layout {
     flex-direction: column; 
-    align-items: flex-start; 
-    gap: 10px; 
   }
-
-  /* --- 2. EXISTING: Container & Layout --- */
-  .post-property-container {
-    padding: 30px 20px;
-    margin: 20px;
-  }
-  
-  .features-grid {
-    grid-template-columns: 1fr; /* Stack segmented controls on mobile */
-  }
-
-  .photo-upload-banner {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  /* --- 3. EXISTING: Segmented Buttons --- */
-  .segmented-control {
+  .help-column {
     width: 100%;
-    display: flex;
-  }
-
-  .segment-btn {
-    flex: 1; /* Make buttons stretch evenly on mobile */
-    padding: 10px;
-    font-size: 0.9rem;
+    position: static; 
+    margin-top: 20px; /* Gives the card breathing room below the form on mobile */
   }
 }
 

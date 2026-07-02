@@ -26,4 +26,17 @@ const protect = async (req, res, next) => {
     }
 };
 
-module.exports = { protect };
+// ... your existing `protect` middleware should be up here ...
+
+// --- NEW: THE ADMIN BOUNCER ---
+const admin = (req, res, next) => {
+  // We check the user object (which was attached by your `protect` middleware)
+  if (req.user && req.user.isAdmin) {
+    next(); // They have the VIP pass, let them through to the controller!
+  } else {
+    res.status(401).json({ message: 'Not authorized as an admin. Access denied.' });
+  }
+};
+
+// Make sure you export BOTH functions now!
+module.exports = { protect, admin };

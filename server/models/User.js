@@ -26,8 +26,13 @@ const userSchema = mongoose.Schema({
     scheduledDeletionDate: {
         type: Date,
         default: null
-    }
-}, { timestamps: true });
+    },
+    // --- NEW: THE ADMIN FLAG ---
+    isAdmin: { type: Boolean, required: true, default: false },
+    
+    savedProperties: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Property' }]
+  },
+ { timestamps: true });
 
 // This line automatically hides the password before saving it (Security first!)
 userSchema.pre('save', async function () {

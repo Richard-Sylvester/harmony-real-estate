@@ -23,9 +23,6 @@ const storage = new CloudinaryStorage({
         // so your frontend doesn't struggle to render weird file types later!
         format: async (req, file) => 'jpg', 
 
-        // Add this transformation array!
-        // The 'strip' flag guarantees all metadata/EXIF/GPS is wiped out
-        transformation: [{ flags: "strip" }]
     }
 });
 
@@ -36,16 +33,25 @@ const upload = multer({
 });
 
 // 3. The Route: Catch the file, upload it, and send the URL back to React
-router.post('/', upload.single('image'), (req, res) => {
-    try {
+router.post('/', (req, res) => {
+    
+    // We wrap the upload middleware in a callback so we can catch its hidden errors!
+    upload.single('image')(req, res, (err) => {
+        
+        // 🚨 IF MULTER OR CLOUDINARY CRASHES, IT GETS TRAPPED HERE:
+        if (err) {
+            console.error("🚨 THE REAL UPLOAD ERROR:", err); 
+            return res.status(500).json({ message: "Upload failed", details: err.message });
+        }
+
+        // If it succeeds but there's no file:
         if (!req.file) {
             return res.status(400).send("No file uploaded or file format not supported.");
         }
-        res.send(req.file.path); 
-    } catch (error) {
-        console.error("Upload Error:", error);
-        res.status(500).send("Server error during upload.");
-    }
+
+        // Success! Send the URL back to the frontend
+        res.send(req.file.path);
+    });
 });
 
 module.exports = router;

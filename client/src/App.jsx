@@ -21,7 +21,7 @@ import HelpCentre from './pages/HelpCentre';
 import Feedback from './pages/Feedback';
 import './App.css';
 
-axios.defaults.baseURL = 'YOUR_FUTURE_RENDER_URL_GOES_HERE';
+axios.defaults.baseURL = 'https://harmony-real-estate.onrender.com';
 
 function App() {
   const [properties, setProperties] = useState([]);

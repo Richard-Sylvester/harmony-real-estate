@@ -121,7 +121,7 @@ const Navbar = () => {
           <div className="nav-divider"></div>
 
           {userInfo ? (
-            /* --- LOGGED IN STATE --- */
+           /* --- LOGGED IN STATE --- */
             <div className="user-menu-container" ref={dropdownRef}>
               <button 
                 className="user-pill-btn" 
@@ -147,6 +147,13 @@ const Navbar = () => {
                   <Link to="/dashboard" className="dropdown-item" onClick={() => setShowUserMenu(false)}>
                     <LayoutDashboard size={16} /> My Dashboard
                   </Link>
+
+                  {/* 🚨 FIXED: Now uses 'userInfo' and 'setShowUserMenu' */}
+                  {userInfo && userInfo.isAdmin && (
+                    <Link to="/admin" onClick={() => setShowUserMenu(false)} className="dropdown-item admin-link">
+                      Admin Control Panel
+                    </Link>
+                  )}
                   
                   <div className="dropdown-divider"></div>
                   

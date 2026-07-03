@@ -78,7 +78,7 @@
   position: absolute;
   top: 15px;
   right: 15px;
-  z-index: 1000; /* Keeps it above the map tiles (Leaflet is z-index: 400) */
+  z-index: 900; /* Keeps it above the map tiles (Leaflet is z-index: 400) */
   background: white;
   border: 1px solid #cbd5e1;
   padding: 10px 16px;

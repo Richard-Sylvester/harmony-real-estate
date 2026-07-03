@@ -17,7 +17,11 @@ import MobileHeader from './components/MobileHeader';
 import AdminRoute from './components/AdminRoute';
 import LegalPage from './pages/LegalPage';
 import AboutUs from './pages/AboutUs';
+import HelpCentre from './pages/HelpCentre';
+import Feedback from './pages/Feedback';
 import './App.css';
+
+axios.defaults.baseURL = 'YOUR_FUTURE_RENDER_URL_GOES_HERE';
 
 function App() {
   const [properties, setProperties] = useState([]);
@@ -50,12 +54,12 @@ function App() {
           <Route path="/edit-property/:id" element={<EditProperty />} />
           <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
 
-          {/* LEGAL & COMPANY ROUTES */}
+          {/* SUPPORT ROUTES */}
           <Route path="/about" element={<AboutUs />} />
           <Route path="/testimonials" element={<div style={{ padding: '100px', textAlign: 'center' }}><h2>Testimonials</h2><p>Coming soon...</p></div>} />
-          <Route path="/help-center" element={<div style={{ padding: '100px', textAlign: 'center' }}><h2>Help Center</h2><p>Coming soon...</p></div>} />
-          <Route path="/feedback" element={<div style={{ padding: '100px', textAlign: 'center' }}><h2>Feedback</h2><p>Coming soon...</p></div>} />
-          {/* --- LEGAL & SUPPORT --- */}
+          <Route path="/help-center" element={<HelpCentre />} />
+          <Route path="/feedback" element={<Feedback />} />
+          {/* --- LEGAL  --- */}
           <Route path="/legal" element={<LegalPage />} />
         </Routes>
       </main>

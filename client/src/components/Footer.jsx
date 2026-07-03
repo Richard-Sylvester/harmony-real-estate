@@ -40,8 +40,9 @@ const Footer = () => {
         <div className="footer-col">
           <h3>Support & Legal</h3>
           <ul className="footer-links">
-            <li><Link to="/legal#help">Help Center</Link></li>
-            <li><Link to="/legal#feedback">Feedback</Link></li>
+            <li><Link to="/help-center">Help Center</Link></li>
+            <li><Link to="/feedback">Feedback</Link></li>
+
             <li><Link to="/legal#terms">Terms of Service</Link></li>
             <li><Link to="/legal#privacy">Privacy Policy</Link></li>
             <li><Link to="/legal#fraud">Fraud Alert</Link></li>
@@ -65,7 +66,7 @@ const Footer = () => {
             <li>
               <Mail className="contact-icon" size={20} />
               <a href="mailto:support@harmonyrealestate.com" className="contact-link">
-                support@harmonyrealestate.com
+                samuel.david@harmonyestates.in
               </a>
             </li>
           </ul>

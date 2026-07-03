@@ -1,0 +1,116 @@
+.feedback-container {
+  min-height: calc(100vh - 80px);
+  background-color: #f8fafc;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 20px;
+}
+
+.feedback-card {
+  background: white;
+  width: 100%;
+  max-width: 600px;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+  border: 1px solid #f1f5f9;
+}
+
+.feedback-card h2 {
+  color: #1b263b;
+  margin: 0 0 5px 0;
+  font-size: 1.8rem;
+}
+
+.feedback-subtitle {
+  color: #64748b;
+  margin-bottom: 30px;
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Inheriting your existing .premium-input styles from global CSS */
+.premium-input {
+  padding: 14px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #1b263b;
+  background-color: #f8fafc;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.premium-input:focus {
+  outline: none;
+  border-color: #C5A059;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1);
+}
+
+.rating-section p {
+  color: #1b263b;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+}
+
+.stars-container {
+  display: flex;
+  gap: 10px;
+}
+
+.feedback-star {
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.feedback-star.filled {
+  color: #C5A059;
+  fill: #C5A059;
+}
+
+.feedback-star:hover {
+  transform: scale(1.1);
+}
+
+.select-feedback {
+  cursor: pointer;
+  appearance: auto;
+}
+
+.feedback-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submit-btn {
+  background-color: #1b263b;
+  color: white;
+  padding: 16px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background-color: #C5A059;
+  transform: translateY(-2px);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .feedback-card {
+    padding: 30px 20px;
+  }
+}

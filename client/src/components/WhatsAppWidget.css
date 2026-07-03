@@ -63,22 +63,26 @@
   transform: translateX(0);
 }
 
-/* --- MOBILE RESPONSIVENESS --- */
+/* --- MOBILE WHATSAPP WIDGET FIX --- */
 @media (max-width: 768px) {
-  .whatsapp-floating-widget {
-    bottom: 25px;
-    right: 25px;
-    width: 55px;
-    height: 55px;
-  }
-  
-  .whatsapp-floating-widget svg {
-    width: 30px;
-    height: 30px;
+  .whatsapp-floating-widget {  /* 🎯 Fixed class name to match your HTML! */
+    display: flex !important;
+    position: fixed !important;     /* Locks it directly to the phone screen glass */
+    bottom: 95px !important;        /* Hovers cleanly right above the fixed BottomNav */
+    right: 15px !important;         /* Anchors 15px safely from the right edge */
+    
+    /* Responsive Proportion Scaling */
+    clip-path: none !important;     
+    overflow: visible !important;   
+    transform: scale(0.80) !important; 
+    transform-origin: bottom right !important; /* Anchors scaling so it doesn't shift off-screen */
+    z-index: 999999 !important;    /* Rides securely above the fixed navigation bar */
   }
 
-  /* Hide tooltip on mobile to prevent screen clutter */
+  /* 🚫 Turn off desktop hover tooltip on touchscreens to prevent accidental clipping */
   .whatsapp-tooltip {
-    display: none;
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
   }
 }

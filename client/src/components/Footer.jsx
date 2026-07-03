@@ -65,7 +65,7 @@ const Footer = () => {
             </li>
             <li>
               <Mail className="contact-icon" size={20} />
-              <a href="mailto:support@harmonyrealestate.com" className="contact-link">
+              <a href="mailto:samuel.david@harmonyestates.in" className="contact-link">
                 samuel.david@harmonyestates.in
               </a>
             </li>

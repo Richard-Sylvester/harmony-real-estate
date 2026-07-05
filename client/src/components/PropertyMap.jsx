@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap, ZoomControl } from 'rea
 import { Link } from 'react-router-dom';
 import { Maximize, Minimize } from 'lucide-react';
 import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import './PropertyMap.css';
 
 // --- THE REACT-LEAFLET ICON FIX ---
@@ -22,18 +23,32 @@ const MapResizer = ({ isFullscreen }) => {
   const map = useMap();
   
   useEffect(() => {
-    // 1. Force Leaflet to recalculate tile layout when size changes
-    setTimeout(() => {
+    // 1. THE BULLETPROOF FIX: ResizeObserver
+    // Natively watches the map's HTML element and recalculates exactly when the DOM shifts
+    const container = map.getContainer();
+    
+    const resizeObserver = new ResizeObserver(() => {
       map.invalidateSize();
-    }, 200);
+    });
 
-    // 2. THE FIX: Dynamically enable or disable scroll wheel zoom
+    if (container) {
+      resizeObserver.observe(container);
+    }
+
+    // 2. Dynamic Scroll Wheel Logic
     if (isFullscreen) {
       map.scrollWheelZoom.enable();  // Let them scroll naturally in full screen
     } else {
       map.scrollWheelZoom.disable(); // Prevent the scroll trap in standard view
     }
     
+    // Cleanup the observer when the component unmounts to prevent memory leaks
+    return () => {
+      if (container) {
+        resizeObserver.unobserve(container);
+      }
+      resizeObserver.disconnect();
+    };
   }, [isFullscreen, map]);
 
   return null;

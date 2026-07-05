@@ -64,11 +64,19 @@
   }
 
   .property-grid > * {
-    flex: 0 0 85%; 
+    flex: 0 0 85vw; 
+    max-width: 85vw;
     scroll-snap-align: start; 
   }
 
-  /* 3. Add safe margin to the map section so it doesn't touch the edges either */
+/* 3. THE BULLETPROOF TITLE FIX */
+  .bucket-title {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-left: 0 !important; /* Eradicates any hidden desktop margins */
+  }
+
+  /* 4. Add safe margin to the map section so it doesn't touch the edges either */
   .map-section-wrapper {
     padding: 0 15px !important; 
     margin-top: 2rem;

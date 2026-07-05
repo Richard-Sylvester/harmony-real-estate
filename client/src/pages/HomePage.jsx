@@ -93,8 +93,8 @@ const HomePage = ({ properties }) => {
             {/* --- BUCKET 1: HARMONY VERIFIED --- */}
             {companyOwnedProps.length > 0 && (
               <div className="property-category-section">
-                <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#1b263b', fontSize: '1.4rem', marginBottom: '20px' }}>
-                  <BadgeCheck size={24} color="#C5A059" /> Harmony Verified
+                <h3 className="bucket-title" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#1b263b', fontSize: '1.4rem', marginBottom: '20px' }}>
+                  Harmony Verified<BadgeCheck size={24} color="#C5A059" />
                 </h3>
                 <div className="property-grid">
                   {companyOwnedProps.map(p => <PropertyCard key={p._id} property={p} />)}
@@ -105,8 +105,8 @@ const HomePage = ({ properties }) => {
             {/* --- BUCKET 2: FEATURED PROPERTIES --- */}
             {featuredProps.length > 0 && (
               <div className="property-category-section">
-                <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#1b263b', fontSize: '1.4rem', marginBottom: '20px' }}>
-                  <Star size={24} color="#C5A059" fill="#C5A059" /> Featured Listings
+                <h3 className="bucket-title" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#1b263b', fontSize: '1.4rem', marginBottom: '20px' }}>
+                  Featured Listings<Star size={24} color="#C5A059" fill="#C5A059" />
                 </h3>
                 <div className="property-grid">
                   {featuredProps.map(p => <PropertyCard key={p._id} property={p} />)}
@@ -117,8 +117,8 @@ const HomePage = ({ properties }) => {
             {/* --- BUCKET 3: FRESH LISTINGS (NORMAL) --- */}
             {normalProps.length > 0 && (
               <div className="property-category-section">
-                <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#1b263b', fontSize: '1.4rem', marginBottom: '20px' }}>
-                  <Clock size={24} color="#415A77" /> Fresh Listings
+                <h3 className="bucket-title" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#1b263b', fontSize: '1.4rem', marginBottom: '20px' }}>
+                  Fresh Listings<Clock size={24} color="#415A77" />
                 </h3>
                 <div className="property-grid">
                   {normalProps.map(p => <PropertyCard key={p._id} property={p} />)}
@@ -129,8 +129,8 @@ const HomePage = ({ properties }) => {
             {/* --- BUCKET 4: SOLD/RENTED (TRACK RECORD) --- */}
             {trackRecordProps.length > 0 && (
               <div className="property-category-section track-record-section">
-                <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#64748b', fontSize: '1.4rem', marginBottom: '20px' }}>
-                  <History size={24} color="#64748b" /> Recently Closed
+                <h3 className="bucket-title" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#64748b', fontSize: '1.4rem', marginBottom: '20px' }}>
+                  Recently Closed<History size={24} color="#64748b" />
                 </h3>
                 <div className="property-grid" style={{ opacity: 0.85 }}> {/* Slight fade for sold items */}
                   {trackRecordProps.map(p => <PropertyCard key={p._id} property={p} />)}

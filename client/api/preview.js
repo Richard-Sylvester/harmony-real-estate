@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   try {
     // 2. Fetch the property data from your live backend
     // 🚨 IMPORTANT: Replace this URL with your actual live Render API URL!
-    const backendUrl = `https://YOUR_RENDER_URL.com/api/properties/${id}`;
+    const backendUrl = `https://harmony-real-estate.onrender.com/api/properties/${id}`;
     const propertyRes = await fetch(backendUrl);
     const property = await propertyRes.json();
 

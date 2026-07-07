@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/property/:id",
+      "destination": "/api/preview"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

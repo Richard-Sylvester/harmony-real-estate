@@ -5,6 +5,10 @@
       "destination": "/api/preview"
     },
     {
+      "source": "/sitemap.xml",
+      "destination": "https://harmony-real-estate.onrender.com/api/sitemap"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

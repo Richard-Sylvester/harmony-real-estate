@@ -4,6 +4,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const mongoose = require('mongoose'); // Import Mongoose
+const sitemapRoute = require('./routes/sitemap');
 
 // Initialize automated background tasks
 require('./cron');
@@ -18,6 +19,7 @@ app.use('/api/properties', require('./routes/propertyRoutes'));
 app.use('/api/upload', require('./routes/uploadRoutes')); // New route for image uploads
 app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/feedback', require('./routes/feedbackRoutes'));
+app.use('/api/sitemap', sitemapRoute);
 
 // Database Connection Logic
 const connectDB = async () => {

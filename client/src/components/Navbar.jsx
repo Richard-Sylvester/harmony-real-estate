@@ -55,13 +55,13 @@ const Navbar = () => {
                 <Link to="/search?type=Sell&tag=premium">Premium Homes</Link>
                 <Link to="/search?type=Sell&status=Under Construction">New Projects <span className="badge">New</span></Link>
               </div>
-              <div className="mega-column">
+             <div className="mega-column">
                 <h4>Property Types</h4>
-                <Link to="/search?type=Sell&category=Apartment/Flat">Flats in Bengaluru</Link>
-                {/* Notice the specific styling inline or add your class for the gold highlight! */}
-                <Link to="/search?type=Sell&category=Residential House">House for sale</Link>
+                {/* Matched exact spelling from form */}
+                <Link to="/search?type=Sell&category=Flat / Apartment">Flats in Bengaluru</Link>
+                <Link to="/search?type=Sell&category=Independent House">House for sale</Link>
                 <Link to="/search?type=Sell&category=Villa">Villa in Bengaluru</Link>
-                <Link to="/search?type=Sell&category=Plot">Plot in Bengaluru</Link>
+                <Link to="/search?type=Sell&category=Residential Plot">Plot in Bengaluru</Link>
               </div>
               <div className="mega-column">
                 <h4>Budget</h4>
@@ -80,14 +80,17 @@ const Navbar = () => {
               <div className="mega-column">
                 <h4>Popular Choices</h4>
                 <Link to="/search?type=Rent&postedBy=owner">Owner Properties</Link>
+                {/* Matches the form's 'furnishedStatus' state exactly */}
                 <Link to="/search?type=Rent&furnishedStatus=Furnished">Furnished Homes</Link>
-                <Link to="/search?type=Rent&tag=bachelor">Bachelor Homes</Link>
+                {/* The Bachelor Workaround: Searches for 1-Bedroom properties */}
+                <Link to="/search?type=Rent&bedrooms=1">Bachelor Homes (1 BHK)</Link>
               </div>
               <div className="mega-column">
                 <h4>Property Types</h4>
-                <Link to="/search?type=Rent&category=Apartment/Flat">Flats for Rent</Link>
-                <Link to="/search?type=Rent&category=Residential House">House for Rent</Link>
-                <Link to="/search?type=Rent&category=Commercial Space">Commercial Space</Link>
+                <Link to="/search?type=Rent&category=Flat / Apartment">Flats for Rent</Link>
+                <Link to="/search?type=Rent&category=Independent House">House for Rent</Link>
+                {/* Maps to Office Space since "Commercial Space" isn't a form category */}
+                <Link to="/search?type=Rent&category=Office Space">Commercial Space</Link>
               </div>
               <div className="mega-column">
                 <h4>Budget</h4>

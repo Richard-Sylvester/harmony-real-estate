@@ -1,4 +1,5 @@
 import React from 'react';
+import founderImage from '../assets/Founder.jpeg';
 import './AboutUs.css'; // We'll create this in the next step
 
 const AboutUs = () => {
@@ -26,7 +27,7 @@ const AboutUs = () => {
 
           <h2 style={{ marginTop: '40px' }}>Meet the Founder</h2>
           <p>
-            <strong>Samuel Mishael David</strong> is the driving force behind Harmony. 
+            <strong>Samuel David</strong> is the driving force behind Harmony. 
             With a deep understanding of the Bengaluru property market and a passion 
             for helping families find their perfect match, he acts as your dedicated 
             point of contact throughout the entire journey.
@@ -40,7 +41,7 @@ const AboutUs = () => {
 
         <div className="about-image">
           <img 
-            src="[INSERT_URL_TO_FOUNDER_PHOTO]" 
+            src={founderImage} 
             alt="Founder of Harmony Real Estate" 
             className="founder-photo"
           />

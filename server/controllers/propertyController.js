@@ -51,16 +51,33 @@ const getProperties = async (req, res) => {
         if (req.query.type) query.type = req.query.type; // 'Sell' or 'Rent'
         if (req.query.category) query.category = req.query.category; // 'Villa', 'Flat', etc.
         if (req.query.status) query.possessionStatus = req.query.status;
+       
+        // 3. Residential Filters
+        if (req.query.bedrooms) query.bedrooms = req.query.bedrooms;
+        if (req.query.bathrooms) query.bathrooms = req.query.bathrooms;
+        if (req.query.balconies) query.balconies = req.query.balconies;
         if (req.query.furnishedStatus) query.furnishedStatus = req.query.furnishedStatus;
 
-        // 3. Catch the Budget filters (Greater Than / Less Than)
+        // 4. Commercial Filters
+        if (req.query.washrooms) query.washrooms = req.query.washrooms;
+        if (req.query.parkingSpaces) query.parkingSpaces = req.query.parkingSpaces;
+
+        // 5. Plot Filters
+        if (req.query.boundaryWall) query.boundaryWall = req.query.boundaryWall;
+        if (req.query.openSides) query.openSides = req.query.openSides;
+
+        // 6. PG Filters
+        if (req.query.roomType) query.roomType = req.query.roomType;
+        if (req.query.foodIncluded) query.foodIncluded = req.query.foodIncluded;
+
+        // 7. Catch the Budget filters (Greater Than / Less Than)
         if (req.query.minPrice || req.query.maxPrice) {
             query.price = {};
             if (req.query.minPrice) query.price.$gte = Number(req.query.minPrice);
             if (req.query.maxPrice) query.price.$lte = Number(req.query.maxPrice);
         }
 
-        // 4. Fetch the properties that match our dynamically built query
+        // 8. Fetch the properties that match our dynamically built query
         const properties = await Property.find(query).sort({ createdAt: -1 }); // Newest first
         
         res.json(properties);

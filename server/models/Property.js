@@ -12,11 +12,17 @@ const propertySchema = mongoose.Schema({
     category: { type: String, required: true }, // 'Residential House', 'Apartment/Flat', etc.
     price: { type: Number, required: true },
     
-    // --- NEW DEDICATED MAGICBRICKS FIELDS ---
+    // 👇 ADD THESE NEW FIELDS 👇
     bedrooms: { type: String },
     bathrooms: { type: String },
     balconies: { type: String },
     furnishedStatus: { type: String },
+    washrooms: { type: String },
+    parkingSpaces: { type: String },
+    boundaryWall: { type: String },
+    openSides: { type: String },
+    roomType: { type: String },
+    foodIncluded: { type: String },
     superArea: { type: Number },
     superAreaUnit: { type: String, default: 'Sq-ft' },
     possessionStatus: { type: String, default: 'Ready to Move' },

@@ -19,7 +19,7 @@ const Footer = () => {
           </p>
           <div className="social-links">
             <a href="#" className="social-icon"><FaFacebook size={18} /></a>
-            <a href="#" className="social-icon"><FaInstagram /></a>
+            <a href="#harmonyestatesblr" className="social-icon"><FaInstagram /></a>
             <a href="#" className="social-icon"><FaTwitter /></a>
           </div>
         </div>
@@ -55,18 +55,21 @@ const Footer = () => {
           <ul className="footer-contact-info">
             <li>
               <MapPin className="contact-icon" size={20} />
-              <a href="https://maps.google.com/?q=124+Prestige+Tower,+MG+Road,+Bengaluru,+Karnataka+560001" target="_blank" rel="noopener noreferrer" className="contact-link">
-                124 Prestige Tower, MG Road,<br />Bengaluru, Karnataka 560001
+              <a target="_blank" rel="noopener noreferrer" className="contact-link">
+                #17, 2nd floor, 7th Main Road, II Stage, Indiranagar,<br />Bengaluru, Karnataka 560038
               </a>
             </li>
             <li>
               <Phone className="contact-icon" size={20} />
-              <a href="tel:+919110621925" className="contact-link">+91 91106 21925</a>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <a href="tel:+919110621925" className="contact-link">+91 91106 21925</a>
+                <a href="tel:+918431421925" className="contact-link">+91 84314 21925</a>
+              </div>
             </li>
             <li>
               <Mail className="contact-icon" size={20} />
-              <a href="mailto:samuel.david@harmonyestates.in" className="contact-link">
-                samuel.david@harmonyestates.in
+              <a href="mailto:support@harmonyestates.in" className="contact-link">
+                support@harmonyestates.in
               </a>
             </li>
           </ul>

@@ -19,6 +19,7 @@ import LegalPage from './pages/LegalPage';
 import AboutUs from './pages/AboutUs';
 import HelpCentre from './pages/HelpCentre';
 import Feedback from './pages/Feedback';
+import ScrollToTop from './components/ScrollToTop';
 import './App.css';
 
 axios.defaults.baseURL = 'https://harmony-real-estate.onrender.com';
@@ -36,6 +37,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <MobileHeader />
       <Navbar />
       <main className="main-layout-container">

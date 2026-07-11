@@ -75,23 +75,51 @@ const PostProperty = () => {
     }
   };
 
-  // Keep your exact upload logic!
+  // The Bulletproof, Sequential Multi-Upload Handler
   const uploadFileHandler = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+    // 1. Grab all selected files and convert them to an array
+    const files = Array.from(e.target.files);
+    if (files.length === 0) return;
     
-    const imageFormData = new FormData();
-    imageFormData.append('image', file);
     setUploading(true);
+    
+    // PRESERVED: Your exact headers
+    const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+    
+    // We keep a temporary array to hold successful uploads
+    let successfulUploads = [];
 
     try {
-      const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-      const { data } = await axios.post('/api/upload', imageFormData, config);
-      setFormData({ ...formData, images: [...formData.images, data] });
+      // 2. The Loop: Uploads one file at a time to protect your server
+      for (const file of files) {
+        const imageFormData = new FormData();
+        // PRESERVED: Multer expects the field name to be 'image'
+        imageFormData.append('image', file);
+        
+        // PRESERVED: Your exact backend route
+        const { data } = await axios.post('/api/upload', imageFormData, config);
+        successfulUploads.push(data); // Save it if it succeeds
+      }
+
+      // 3. PRESERVED: Safely update your form data state all at once
+      setFormData(prev => ({ 
+        ...prev, 
+        images: [...prev.images, ...successfulUploads] 
+      }));
+      
       setUploading(false);
+
     } catch (error) {
-      console.error(error);
-      alert('Image upload failed!');
+      console.error("Upload error:", error);
+      alert('Some images failed to upload, but the successful ones were saved!');
+      
+      // Failsafe: Even if the 4th photo crashes, we still keep the first 3 that worked!
+      if (successfulUploads.length > 0) {
+        setFormData(prev => ({ 
+          ...prev, 
+          images: [...prev.images, ...successfulUploads] 
+        }));
+      }
       setUploading(false);
     }
   };
@@ -486,7 +514,7 @@ return (
                   <p>Upload Photos & Get upto <strong>10X more Enquiries</strong></p>
                 </div>
                 {/* The hidden input is wired to the styling button */}
-                <input type="file" id="magic-upload" onChange={uploadFileHandler} style={{ opacity: 0, position: 'absolute', zIndex: -1 }} />
+                <input type="file" id="magic-upload" multiple onChange={uploadFileHandler} style={{ opacity: 0, position: 'absolute', zIndex: -1 }} />
                 <label htmlFor="magic-upload" className="upload-btn" style={{ display: 'inline-block', textAlign: 'center' }}>
                   {uploading ? 'Uploading...' : 'Add Photos Now'}
                 </label>

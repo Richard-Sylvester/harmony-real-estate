@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { User, ChevronDown, LogOut, LayoutDashboard } from 'lucide-react';
-import logo from '../assets/logo.png';
+import logo2 from '../assets/logo2.svg';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -37,7 +37,7 @@ const Navbar = () => {
         
         {/* 1. LEFT SIDE: Logo */}
         <Link to="/" className="navbar-logo">
-          <img src={logo} alt="Harmony Logo" className="brand-logo-img" />
+          <img src={logo2} alt="Harmony Logo" className="brand-logo-img" />
         </Link>
 
         {/* 2. CENTER: Your Mega Menus */}

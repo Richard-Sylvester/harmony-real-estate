@@ -26,16 +26,18 @@
 .navbar-logo {
   display: flex;
   align-items: center;
-  text-decoration: none;
-  height: 100%;
+  /* Removes any weird default link margins */
+  margin: 0; 
+  padding: 0;
 }
 
 .brand-logo-img {
-  height: 70px;
+  /* Increase this number until the logo looks perfect (usually between 50px - 70px) */
+  height: 70px; 
   width: auto;
-  object-fit: contain;
-  /* 🚨 THE GOLD FIX: This specific filter chain precisely calculates #C5A059 */
-  filter: brightness(0) saturate(100%) invert(71%) sepia(21%) saturate(769%) hue-rotate(6deg) brightness(95%) contrast(88%);
+  
+  /* This prevents the SVG from stretching or distorting out of proportion */
+  object-fit: contain; 
 }
 
 /* --- MIDDLE LINKS --- */

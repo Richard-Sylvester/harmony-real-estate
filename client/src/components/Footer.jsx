@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
-import logo from '../assets/logo.png';
+import logo3 from '../assets/logo3.svg';
 import './Footer.css';
 
 const Footer = () => {
@@ -12,7 +12,7 @@ const Footer = () => {
         {/* Column 1: Brand & About */}
         <div className="footer-col brand-col">
           <Link to="/" className="footer-logo-link">
-            <img src={logo} alt="Harmony Real Estate Logo" className="footer-logo-img" />
+            <img src={logo3} alt="Harmony Real Estate Logo" className="footer-logo-img" />
           </Link>
           <p className="footer-about">
             Bengaluru's premier real estate platform. We connect verified buyers, sellers, and renters with premium properties across the city.

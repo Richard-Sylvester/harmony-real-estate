@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { LayoutDashboard, Users, Building, ShieldCheck, CheckCircle, Trash2, Shield, Star } from 'lucide-react';
-import './Dashboard.css'; // Reusing your beautiful, mobile-responsive dashboard styles!
+import { Users, Building, Clock, CheckCircle, Trash2, Star, Search, PlusCircle } from 'lucide-react';
+import './AdminDashboard.css';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState(null);
-  const [activeTab, setActiveTab] = useState('overview');
+  
+  const [activeTab, setActiveTab] = useState('users');
+  
+  // 🚨 NEW: Search State
+  const [searchTerm, setSearchTerm] = useState('');
   
   // Data States
   const [stats, setStats] = useState({ totalUsers: 0, totalProperties: 0, pendingApprovals: 0 });
@@ -15,14 +19,12 @@ const AdminDashboard = () => {
   const [allProperties, setAllProperties] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 1. Authenticate & Fetch Data
   useEffect(() => {
     const fetchAdminData = async (token) => {
       try {
         setLoading(true);
         const config = { headers: { Authorization: `Bearer ${token}` } };
         
-        // We will build these backend routes next!
         const [statsRes, usersRes, propsRes] = await Promise.all([
           axios.get('/api/admin/stats', config),
           axios.get('/api/admin/users', config),
@@ -44,7 +46,6 @@ const AdminDashboard = () => {
       navigate('/login');
     } else {
       const parsedUser = JSON.parse(storedUser);
-      // The Bouncer: Kick non-admins out!
       if (!parsedUser.isAdmin) {
         navigate('/'); 
       } else {
@@ -59,8 +60,6 @@ const AdminDashboard = () => {
     try {
       const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
       await axios.put(`/api/admin/properties/${id}/approve`, {}, config);
-      
-      // Update UI instantly
       setAllProperties(prev => prev.map(p => p._id === id ? { ...p, isApproved: true } : p));
       setStats(prev => ({ ...prev, pendingApprovals: prev.pendingApprovals - 1 }));
     } catch (error) {
@@ -73,8 +72,6 @@ const AdminDashboard = () => {
     try {
       const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
       await axios.put(`/api/admin/properties/${id}/feature`, {}, config);
-      
-      // INSTANT UI UPDATE: Flip the star on the screen without refreshing
       setAllProperties(prev => prev.map(p => 
         p._id === id ? { ...p, isFeatured: !p.isFeatured } : p
       ));
@@ -102,10 +99,7 @@ const AdminDashboard = () => {
       try {
         const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
         await axios.delete(`/api/admin/users/${id}`, config);
-        
-        // Remove the user from the UI instantly
         setAllUsers(prev => prev.filter(u => u._id !== id));
-        // Update the stats counter so everything stays perfectly in sync
         setStats(prev => ({ ...prev, totalUsers: prev.totalUsers - 1 })); 
       } catch (error) {
         console.error(error);
@@ -114,183 +108,231 @@ const AdminDashboard = () => {
     }
   };
 
+  // 🚨 NEW: The Filtering Logic for the Search Bar
+  const filteredUsers = allUsers.filter(user => 
+    user.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredProperties = allProperties.filter(property => 
+    property.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    property.location?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Helper to clear search when swapping tabs
+  const handleTabSwitch = (tab) => {
+    setActiveTab(tab);
+    setSearchTerm('');
+  };
+
   if (!userInfo) return null;
 
   return (
-    <div className="premium-dashboard">
+    <div className="admin-container fade-in">
       
-      {/* --- ADMIN SIDEBAR --- */}
-      <aside className="dashboard-sidebar">
-        <div className="sidebar-profile" style={{ borderBottom: '4px solid #ef4444' }}>
-          <div className="profile-avatar" style={{ backgroundColor: '#ef4444' }}>
-            <Shield size={24} color="white" />
+      {/* 1. HEADER */}
+      <div className="admin-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <h1>Harmony Admin Control Panel</h1>
+          <p>Welcome to the control room, {userInfo.name}.</p>
+        </div>
+        <Link to="/post-property?type=company" className="primary-action-btn" style={{ backgroundColor: '#ef4444', border: 'none', display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 20px', borderRadius: '8px', color: 'white', textDecoration: 'none', fontWeight: 'bold' }}>
+          <PlusCircle size={18} /> Add Company Property
+        </Link>
+      </div>
+
+      {/* 2. TOP SUMMARY CARDS */}
+      {loading ? <p>Loading dashboard data...</p> : (
+        <div className="stats-grid">
+          <div className="stat-card">
+            <div className="stat-icon-wrapper">
+              <Users size={28} color="#C5A059" />
+            </div>
+            <div className="stat-details">
+              <h3>{stats.totalUsers}</h3>
+              <p>Registered Users</p>
+            </div>
           </div>
-          <div className="profile-info">
-            <h3>Admin Portal</h3>
-            <span className="role-badge" style={{ backgroundColor: '#fef2f2', color: '#ef4444' }}>Supervisor</span>
+
+          <div className="stat-card">
+            <div className="stat-icon-wrapper">
+              <Building size={28} color="#C5A059" />
+            </div>
+            <div className="stat-details">
+              <h3>{stats.totalProperties}</h3>
+              <p>Total Properties</p>
+            </div>
+          </div>
+
+          <div className="stat-card">
+            <div className="stat-icon-wrapper">
+              <Clock size={28} color="#C5A059" />
+            </div>
+            <div className="stat-details">
+              <h3 style={{ color: stats.pendingApprovals > 0 ? '#ef4444' : '#1b263b' }}>
+                {stats.pendingApprovals}
+              </h3>
+              <p>Pending Approvals</p>
+            </div>
           </div>
         </div>
+      )}
 
-        <nav className="sidebar-nav">
-          <button className={`nav-btn ${activeTab === 'overview' ? 'active' : ''}`} onClick={() => setActiveTab('overview')}>
-            <LayoutDashboard size={18} /> Analytics
+      {/* 3. LIST CONTROLS & SEARCH BAR */}
+      <div className="table-controls">
+        <div className="admin-tabs">
+          <button 
+            className={`tab-btn ${activeTab === 'users' ? 'active' : ''}`}
+            onClick={() => handleTabSwitch('users')}
+          >
+            User Management
           </button>
-          <button className={`nav-btn ${activeTab === 'properties' ? 'active' : ''}`} onClick={() => setActiveTab('properties')}>
-            <Building size={18} /> Property Moderation
+          <button 
+            className={`tab-btn ${activeTab === 'properties' ? 'active' : ''}`}
+            onClick={() => handleTabSwitch('properties')}
+          >
+            Property Moderation
           </button>
-          <button className={`nav-btn ${activeTab === 'users' ? 'active' : ''}`} onClick={() => setActiveTab('users')}>
-            <Users size={18} /> User Management
-          </button>
-        </nav>
-      </aside>
-
-      {/* --- MAIN CONTENT --- */}
-      <main className="dashboard-content">
+        </div>
         
-        {/* 1. ANALYTICS TAB */}
-        {activeTab === 'overview' && (
-          <div className="tab-section fade-in">
-            <div className="content-header">
-              <div>
-                <h1>Platform Analytics</h1>
-                <p>Welcome to the control room, {userInfo.name}.</p>
-              </div>
-              {/* The Company-Owned Property Button */}
-              <Link to="/post-property?type=company" className="primary-action-btn" style={{ backgroundColor: '#ef4444', border: 'none' }}>
-                + Add Company Property
-              </Link>
-            </div>
+        {/* 🚨 WIRED SEARCH BAR */}
+        <div style={{ position: 'relative' }}>
+          <Search size={18} color="#64748b" style={{ position: 'absolute', left: '10px', top: '10px' }} />
+          <input 
+            type="text" 
+            placeholder={`Search ${activeTab}...`} 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{ padding: '10px 10px 10px 35px', borderRadius: '6px', border: '1px solid #e2e8f0', outline: 'none', width: '250px' }} 
+          />
+        </div>
+      </div>
 
-            {loading ? <p>Loading stats...</p> : (
-              <div className="stats-grid">
-                <div className="stat-card">
-                  <div className="stat-icon wrap-blue"><Users size={24} /></div>
-                  <div className="stat-info">
-                    <h3>{stats.totalUsers}</h3>
-                    <p>Registered Users</p>
-                  </div>
-                </div>
-                <div className="stat-card">
-                  <div className="stat-icon wrap-green"><Building size={24} /></div>
-                  <div className="stat-info">
-                    <h3>{stats.totalProperties}</h3>
-                    <p>Total Properties</p>
-                  </div>
-                </div>
-                <div className="stat-card">
-                  <div className="stat-icon wrap-gold"><ShieldCheck size={24} /></div>
-                  <div className="stat-info">
-                    <h3 style={{ color: stats.pendingApprovals > 0 ? '#ef4444' : 'inherit' }}>
-                      {stats.pendingApprovals}
-                    </h3>
-                    <p>Pending Approvals</p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+      {/* 4. THE DATA TABLES */}
+      <div className="table-container">
+        
+        {/* --- USERS TABLE --- */}
+        {activeTab === 'users' && !loading && (
+          <table className="harmony-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* 🚨 Now maps over filteredUsers instead of allUsers */}
+              {filteredUsers.map((user) => (
+                <tr key={user._id}>
+                  <td>
+                    <div className="user-cell">
+                      <div className="user-avatar" style={{ background: user.isAdmin ? '#C5A059' : '#e2e8f0', color: user.isAdmin ? 'white' : '#64748b' }}>
+                        {user.name.charAt(0).toUpperCase()}
+                      </div>
+                      <div>
+                        <span className="cell-primary">{user.name}</span>
+                        <span className="cell-secondary">{user.email}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    {/* 🚨 THE NEW ROLE BADGE LOGIC */}
+                    <span className={`badge ${
+                      user.isAdmin ? 'admin' : 
+                      (user.role?.toLowerCase() === 'seller' ? 'seller' : 'buyer')
+                    }`}>
+                      {user.isAdmin ? 'Admin' : (user.role || 'Buyer')}
+                    </span>
+                  </td>
+                  <td><span className="badge active">Active</span></td>
+                  <td>
+                    {!user.isAdmin && (
+                      <div className="action-btns">
+                        <button className="btn-icon delete" onClick={() => handleDeleteUser(user._id)} title="Delete User">
+                          <Trash2 size={18} />
+                        </button>
+                      </div>
+                    )}
+                  </td>
+                </tr>
+              ))}
+              {filteredUsers.length === 0 && (
+                <tr><td colSpan="4" style={{ textAlign: 'center', padding: '30px' }}>No users found matching "{searchTerm}"</td></tr>
+              )}
+            </tbody>
+          </table>
         )}
 
-       {/* 2. PROPERTY MODERATION TAB */}
-        {activeTab === 'properties' && (
-          <div className="tab-section fade-in">
-            <div className="content-header">
-              <div>
-                <h1>Property Moderation</h1>
-                <p>Approve new listings or remove policy violations.</p>
-              </div>
-            </div>
-            
-            {loading ? <p>Loading properties...</p> : (
-              <div className="dashboard-property-grid">
-                {allProperties.map((property) => (
-                  <div key={property._id} className="dashboard-card" style={{ border: property.isApproved ? '1px solid #e2e8f0' : '2px solid #eab308' }}>
-                    
-                    {/* 🚨 THE FIX: Wrap the details in a Link to view the full post! */}
-                    <Link 
-                      to={`/property/${property._id}`} 
-                      className="card-details" 
-                      style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
-                    >
-                      <div className="card-tag">{property.type}</div>
-                      <h3 className="card-title">{property.title}</h3>
-                      <p className="card-price">₹{property.price?.toLocaleString('en-IN')}</p>
-                      {!property.isApproved && <span style={{ color: '#eab308', fontWeight: 'bold', fontSize: '0.8rem', display: 'block', marginTop: '10px' }}>⚠️ PENDING APPROVAL</span>}
+        {/* --- PROPERTIES TABLE --- */}
+        {activeTab === 'properties' && !loading && (
+          <table className="harmony-table">
+            <thead>
+              <tr>
+                <th>Property Details</th>
+                <th>Type</th>
+                <th>Price & Category</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* 🚨 Now maps over filteredProperties */}
+              {filteredProperties.map((property) => (
+                <tr key={property._id}>
+                  <td>
+                    <Link to={`/property/${property._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                      <span className="cell-primary">{property.title}</span>
+                      <span className="cell-secondary">{property.location || 'Bengaluru'}</span>
                     </Link>
-
-                    {/* The Actions sit safely outside the Link */}
-                    <div className="card-actions">
-                      {/* Show Approve if it's pending */}
+                  </td>
+                  <td><span className="cell-primary">{property.type}</span></td>
+                  <td>
+                    <span className="cell-primary">₹ {property.price?.toLocaleString('en-IN')}</span>
+                    <span className="cell-secondary">{property.category}</span>
+                  </td>
+                  <td>
+                    {property.isApproved ? (
+                       <span className="badge active">Live</span>
+                    ) : (
+                       <span className="badge pending">Pending</span>
+                    )}
+                  </td>
+                  <td>
+                    <div className="action-btns">
                       {!property.isApproved && (
-                        <button className="action-btn" style={{ color: '#10b981' }} onClick={() => handleApproveProperty(property._id)}>
-                          <CheckCircle size={16} /> Approve
+                        <button className="btn-icon approve" onClick={() => handleApproveProperty(property._id)} title="Approve">
+                          <CheckCircle size={18} />
                         </button>
                       )}
 
-                      {/* Show Feature Star ONLY if it's already approved */}
                       {property.isApproved && (
                         <button 
-                          className="action-btn" 
-                          style={{ color: property.isFeatured ? '#C5A059' : '#64748b' }} 
-                          onClick={() => handleToggleFeature(property._id)}
+                          className="btn-icon edit" 
+                          onClick={() => handleToggleFeature(property._id)} 
+                          title={property.isFeatured ? "Unfeature" : "Feature"}
+                          style={{ color: property.isFeatured ? '#C5A059' : '#64748b' }}
                         >
-                          <Star size={16} fill={property.isFeatured ? '#C5A059' : 'transparent'} /> 
-                          {property.isFeatured ? 'Unfeature' : 'Feature'}
+                          <Star size={18} fill={property.isFeatured ? '#C5A059' : 'transparent'} />
                         </button>
                       )}
 
-                      {/* Delete is always available */}
-                      <button className="action-btn delete" onClick={() => handleDeleteProperty(property._id)}>
-                        <Trash2 size={16} /> Delete
+                      <button className="btn-icon delete" onClick={() => handleDeleteProperty(property._id)} title="Delete Property">
+                        <Trash2 size={18} />
                       </button>
                     </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+                  </td>
+                </tr>
+              ))}
+              {filteredProperties.length === 0 && (
+                <tr><td colSpan="5" style={{ textAlign: 'center', padding: '30px' }}>No properties found matching "{searchTerm}"</td></tr>
+              )}
+            </tbody>
+          </table>
         )}
 
-        {/* 3. USER MANAGEMENT TAB */}
-        {activeTab === 'users' && (
-          <div className="tab-section fade-in">
-            <div className="content-header">
-              <div>
-                <h1>User Management</h1>
-                <p>View and manage all registered accounts.</p>
-              </div>
-            </div>
-            
-           {loading ? <p>Loading users...</p> : (
-              <div className="dashboard-property-grid">
-                {allUsers.map((user) => (
-                  <div key={user._id} className="dashboard-card" style={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    
-                    {/* User Info */}
-                    <div>
-                      <h3 style={{ margin: '0 0 5px 0' }}>{user.name}</h3>
-                      <p style={{ margin: '0 0 10px 0', color: '#64748b' }}>{user.email}</p>
-                      <span className="role-badge">{user.isAdmin ? 'ADMIN' : user.role}</span>
-                    </div>
-
-                    {/* Delete Button (Hidden for Admins so you can't delete yourself!) */}
-                    {!user.isAdmin && (
-                      <button 
-                        className="action-btn delete" 
-                        onClick={() => handleDeleteUser(user._id)}
-                      >
-                        <Trash2 size={16} /> Delete
-                      </button>
-                    )}
-
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-
-      </main>
+      </div>
     </div>
   );
 };
